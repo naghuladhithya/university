@@ -2,55 +2,79 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Naghul Adhithya – University Decisions</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Naghul Adhithya – University Admissions Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h1>🎓 Naghul Adhithya – University Admissions</h1>
-    <p class="subtitle">Fall 2026 Applications • Status • Offer Letters • Scholarships</p>
+  <div class="dashboard">
+    <header>
+      <h1>Naghul Adhithya</h1>
+      <p class="tagline">University Admissions Dashboard</p>
+      <p class="subtag">Fall 2026 Applications • Status Tracking • Documents & Scholarships</p>
+    </header>
 
-    <table>
-      <thead>
-        <tr>
-          <th>University</th>
-          <th>Status</th>
-          <th>Applied On</th>
-          <th>Decision Date</th>
-          <th>Documents</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="accepted">
-          <td>Florida Institute of Technology</td>
-          <td><span class="pill accepted-pill">Accepted</span></td>
-          <td>June 27, 2025</td>
-          <td>July 2, 2025</td>
-          <td>
-            <a href="Florida Tech.pdf" target="_blank">📄 Offer Letter</a><br />
-            <a href="Florida Tech Scholarship.pdf" target="_blank">🎓 Scholarship Letter</a>
-            <ul class="scholarship-list">
-              <li>Merit Scholarship – $17,500/year</li>
-            </ul>
-          </td>
-        </tr>
-        <tr class="waiting">
-          <td>Arizona State University</td>
-          <td><span class="pill waiting-pill">Applied</span></td>
-          <td>July 1, 2025</td>
-          <td>Waiting</td>
-          <td>–</td>
-        </tr>
-        <tr class="waiting">
-          <td>Iowa State University</td>
-          <td><span class="pill waiting-pill">Applied</span></td>
-          <td>July 1, 2025</td>
-          <td>Waiting</td>
-          <td>–</td>
-        </tr>
-      </tbody>
-    </table>
+    <section class="summary">
+      <div class="card accepted">
+        <p class="value">1</p>
+        <p class="label">Accepted</p>
+      </div>
+      <div class="card pending">
+        <p class="value">2</p>
+        <p class="label">Pending</p>
+      </div>
+      <div class="card scholarship">
+        <p class="value">$17.5K</p>
+        <p class="label">Annual Scholarship</p>
+      </div>
+    </section>
+
+    <section class="table-section">
+      <h2>Application Status</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>University</th>
+            <th>Status</th>
+            <th>Applied</th>
+            <th>Decision</th>
+            <th>Documents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Florida Institute of Technology</td>
+            <td><span class="pill accepted">Accepted</span></td>
+            <td>June 27, 2025</td>
+            <td>July 2, 2025</td>
+            <td>
+              <a href="#">Offer Letter</a><br/>
+              <a href="#">Scholarship Letter</a><br/>
+              <span class="scholarship-list">Scholarships:<br/>Merit Scholarship – $17,500/year</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Arizona State University</td>
+            <td><span class="pill pending">Applied</span></td>
+            <td>July 1, 2025</td>
+            <td>Pending</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Iowa State University</td>
+            <td><span class="pill pending">Applied</span></td>
+            <td>July 1, 2025</td>
+            <td>Pending</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      <p>Last updated: July 3, 2025</p>
+    </footer>
   </div>
 </body>
 </html>
