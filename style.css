@@ -31,6 +31,9 @@ th {
   color: green;
   font-weight: 600;
 }
+.waiting td {
+  color: #f0ad4e;
+}
 .denied td {
   color: #b30000;
 }
