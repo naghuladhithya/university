@@ -1,60 +1,114 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #0f1117;
-  color: #e0e0e0;
-  padding: 40px;
-  line-height: 1.6;
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: #0d1117;
+  color: #c9d1d9;
 }
 
-.container {
-  max-width: 960px;
-  margin: auto;
-  background: #1a1c22;
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+.dashboard {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 h1 {
+  font-size: 2.4rem;
+  color: #58a6ff;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: 1.4rem;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.subtag {
+  color: #8b949e;
+  font-size: 1rem;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 40px;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #161b22;
+  padding: 20px;
+  border-radius: 10px;
   text-align: center;
-  font-size: 2em;
-  margin-bottom: 10px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.card .value {
+  font-size: 2rem;
+  font-weight: 600;
   color: #ffffff;
 }
 
-p {
-  text-align: center;
-  color: #aaaaaa;
-  margin-bottom: 30px;
+.card .label {
+  font-size: 1rem;
+  color: #8b949e;
+}
+
+.card.accepted .value {
+  color: #3fb950;
+}
+
+.card.pending .value {
+  color: #f0b72f;
+}
+
+.card.scholarship .value {
+  color: #58a6ff;
+}
+
+.table-section h2 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #ffffff;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #1a1c22;
-  color: #e0e0e0;
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 th, td {
   padding: 16px;
-  text-align: center;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #30363d;
+  text-align: left;
+  vertical-align: top;
 }
 
 th {
-  background-color: #20232b;
-  color: #bbbbbb;
-  font-weight: 600;
+  background-color: #21262d;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: #c9d1d9;
 }
 
-tr:hover {
-  background-color: #2b2f38;
+tr:last-child td {
+  border-bottom: none;
 }
 
 a {
-  color: #00bfff;
+  color: #58a6ff;
   text-decoration: none;
-  font-weight: 500;
 }
 
 a:hover {
@@ -62,24 +116,31 @@ a:hover {
 }
 
 .pill {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.85em;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
   font-weight: bold;
-  display: inline-block;
+  color: #fff;
 }
 
-.accepted-pill {
-  background-color: #007f5f;
-  color: #d4f4e3;
+.pill.accepted {
+  background-color: #238636;
 }
 
-.waiting-pill {
-  background-color: #5a5a5a;
-  color: #f0f0f0;
+.pill.pending {
+  background-color: #9e6a03;
 }
 
-.denied-pill {
-  background-color: #b00020;
-  color: #ffdada;
+.scholarship-list {
+  color: #7ee787;
+  display: block;
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+
+footer {
+  text-align: center;
+  color: #8b949e;
+  font-size: 0.85rem;
+  margin-top: 30px;
 }
