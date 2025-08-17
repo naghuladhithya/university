@@ -6,6 +6,52 @@
   <title>Naghul Adhithya – University Admissions Dashboard</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f8f9fa;
+      font-weight: 600;
+    }
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+    .pill {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.85em;
+      font-weight: 600;
+    }
+    .pending {
+      background-color: #FFF3CD;
+      color: #856404;
+    }
+    .accepted {
+      background-color: #D4EDDA;
+      color: #155724;
+    }
+    .scholarship-list {
+      font-size: 0.8em;
+      margin-top: 4px;
+      display: block;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <div class="dashboard">
@@ -31,6 +77,7 @@
       <table>
         <thead>
           <tr>
+            <th>#</th>
             <th>University</th>
             <th>Ranking <br>(QS/Country)</th>
             <th>Status</th>
@@ -42,6 +89,7 @@
         <tbody>
           <!-- QS Top 20 -->
           <tr>
+            <td>1</td>
             <td>National University of Singapore (NUS)</td>
             <td>QS#8 <br> SG#1</td>
             <td><span class="pill pending">-</span></td>
@@ -50,6 +98,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>2</td>
             <td>University of Hong Kong (HKU)</td>
             <td>QS#11 <br> HK#1</td>
             <td><span class="pill pending">-</span></td>
@@ -58,6 +107,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>3</td>
             <td>Nanyang Technological University (NTU)</td>
             <td>QS#12 <br> SG#2</td>
             <td><span class="pill pending">-</span></td>
@@ -68,6 +118,7 @@
           
           <!-- QS Top 50 -->
           <tr>
+            <td>4</td>
             <td>University of Edinburgh</td>
             <td>QS#33 <br> UK#4</td>
             <td><span class="pill pending">-</span></td>
@@ -76,6 +127,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>5</td>
             <td>University of Manchester</td>
             <td>QS#35 <br> UK#6</td>
             <td><span class="pill pending">-</span></td>
@@ -86,6 +138,7 @@
           
           <!-- QS Top 100 -->
           <tr>
+            <td>6</td>
             <td>Brown University</td>
             <td>QS#69 <br> USA#25</td>
             <td><span class="pill pending">-</span></td>
@@ -94,6 +147,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>7</td>
             <td>University of Illinois Urbana-Champaign (UIUC)</td>
             <td>QS#70 <br> USA#5</td>
             <td><span class="pill pending">-</span></td>
@@ -102,6 +156,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>8</td>
             <td>University of Glasgow</td>
             <td>QS#79 <br> UK#12</td>
             <td><span class="pill pending">-</span></td>
@@ -110,6 +165,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>9</td>
             <td>Penn State University</td>
             <td>QS#82 <br> USA#24</td>
             <td><span class="pill pending">Applied</span></td>
@@ -118,6 +174,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>10</td>
             <td>Purdue University</td>
             <td>QS#88 <br> USA#17</td>
             <td><span class="pill pending">-</span></td>
@@ -126,6 +183,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>11</td>
             <td>University of Nottingham</td>
             <td>QS#97 <br> UK#17</td>
             <td><span class="pill pending">-</span></td>
@@ -134,6 +192,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>12</td>
             <td>University of Wisconsin–Madison</td>
             <td>QS#110 <br> USA#17</td>
             <td><span class="pill pending">-</span></td>
@@ -144,6 +203,7 @@
           
           <!-- QS 100-200 -->
           <tr>
+            <td>13</td>
             <td>University College Dublin</td>
             <td>QS#118 <br> Ireland#2</td>
             <td><span class="pill pending">-</span></td>
@@ -152,6 +212,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>14</td>
             <td>Georgia Institute of Technology</td>
             <td>QS#123 <br> USA#9</td>
             <td><span class="pill pending">-</span></td>
@@ -160,6 +221,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>15</td>
             <td>University of Southern California (USC)</td>
             <td>QS#146 <br> USA#23</td>
             <td><span class="pill pending">-</span></td>
@@ -168,6 +230,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>16</td>
             <td>University of Liverpool</td>
             <td>QS#149 <br> UK#15</td>
             <td><span class="pill pending">-</span></td>
@@ -176,6 +239,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>17</td>
             <td>Arizona State University</td>
             <td>QS#173 <br> USA#36</td>
             <td><span class="pill pending">Applied</span></td>
@@ -184,6 +248,7 @@
             <td>—</td>
           </tr>
           <tr>
+            <td>18</td>
             <td>University of Maryland</td>
             <td>QS#207 <br> USA#13</td>
             <td><span class="pill pending">-</span></td>
@@ -194,6 +259,7 @@
           
           <!-- QS 400+ -->
           <tr>
+            <td>19</td>
             <td>Iowa State University</td>
             <td>QS#449 <br> USA#54</td>
             <td><span class="pill accepted">Accepted</span></td>
@@ -204,6 +270,7 @@
           
           <!-- QS 1000+ -->
           <tr>
+            <td>20</td>
             <td>Florida Institute of Technology</td> 
             <td>QS#1000 <br> USA#177</td>
             <td>
