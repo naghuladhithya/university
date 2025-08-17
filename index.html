@@ -16,6 +16,7 @@
       --success: #3bd987;
       --warning: #ffc445;
       --error: #ff6b6b;
+      --applied: #5eb0ff;
       --border: #2a3446;
       --border-radius: 10px;
       --shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
@@ -113,15 +114,15 @@
       left: 0;
       width: 100%;
       height: 4px;
-      background: var(--text-accent);
+      background: var(--applied);
     }
 
     .card.accepted::before {
       background: var(--success);
     }
 
-    .card.pending::before {
-      background: var(--warning);
+    .card.rejected::before {
+      background: var(--error);
     }
 
     .card:hover {
@@ -148,8 +149,12 @@
       color: var(--success);
     }
 
-    .card.pending .value {
-      color: var(--warning);
+    .card.rejected .value {
+      color: var(--error);
+    }
+
+    .card.applied .value {
+      color: var(--applied);
     }
 
     .table-section {
@@ -275,6 +280,26 @@
       background-color: var(--warning);
     }
 
+    .pill.applied {
+      background-color: rgba(94, 176, 255, 0.15);
+      color: var(--applied);
+      border: 1px solid rgba(94, 176, 255, 0.3);
+    }
+
+    .pill.applied::before {
+      background-color: var(--applied);
+    }
+
+    .pill.rejected {
+      background-color: rgba(255, 107, 107, 0.15);
+      color: var(--error);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+    }
+
+    .pill.rejected::before {
+      background-color: var(--error);
+    }
+
     .scholarship-list {
       color: var(--success);
       display: block;
@@ -329,13 +354,17 @@
     </header>
 
     <section class="summary">
-      <div class="card accepted">
-        <p class="value">4</p>
+      <div class="card applied">
+        <p class="value">20</p>
         <p class="label">Applied</p>
       </div>
-      <div class="card pending">
+      <div class="card accepted">
         <p class="value">2</p>
-        <p class="label">Pending</p>
+        <p class="label">Accepted</p>
+      </div>
+      <div class="card rejected">
+        <p class="value">0</p>
+        <p class="label">Rejected</p>
       </div>
     </section>
 
@@ -435,7 +464,7 @@
             <td>9</td>
             <td>Penn State University</td>
             <td>QS#82 <br> USA#24</td>
-            <td><span class="pill pending">Applied</span></td>
+            <td><span class="pill applied">Applied</span></td>
             <td>Aug 12, 2025</td>
             <td>Pending</td>
             <td>—</td>
@@ -509,7 +538,7 @@
             <td>17</td>
             <td>Arizona State University</td>
             <td>QS#173 <br> USA#36</td>
-            <td><span class="pill pending">Applied</span></td>
+            <td><span class="pill applied">Applied</span></td>
             <td>July 1, 2025</td>
             <td>Pending</td>
             <td>—</td>
