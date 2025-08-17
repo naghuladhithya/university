@@ -4,52 +4,319 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Naghul Adhithya – University Admissions Dashboard</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-primary: #0a0f1a;
+      --bg-secondary: #141a26;
+      --bg-accent: #1e2636;
+      --text-primary: #e2e8f0;
+      --text-secondary: #8a9bb8;
+      --text-accent: #5eb0ff;
+      --success: #3bd987;
+      --warning: #ffc445;
+      --error: #ff6b6b;
+      --border: #2a3446;
+      --border-radius: 10px;
+      --shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .dashboard {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--text-accent), var(--success));
+      border-radius: 3px;
+    }
+
+    h1 {
+      font-size: 2.75rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, var(--text-accent), #7dc8ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .tagline {
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .subtag {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    .summary {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: var(--bg-secondary);
+      padding: 1.75rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--text-accent);
+    }
+
+    .card.accepted::before {
+      background: var(--success);
+    }
+
+    .card.pending::before {
+      background: var(--warning);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .card .value {
+      font-size: 2.75rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card .label {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    .card.accepted .value {
+      color: var(--success);
+    }
+
+    .card.pending .value {
+      color: var(--warning);
+    }
+
+    .table-section {
+      margin-top: 3rem;
+    }
+
+    .table-section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.75rem;
+      color: var(--text-primary);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .table-section h2::before {
+      content: "";
+      display: block;
+      width: 6px;
+      height: 24px;
+      background: linear-gradient(to bottom, var(--text-accent), var(--success));
+      border-radius: 3px;
+      position: absolute;
+      left: 0;
+    }
+
     table {
       width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
+      border-collapse: separate;
+      border-spacing: 0;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
     }
+
     th, td {
-      padding: 12px 15px;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
       text-align: left;
-      border-bottom: 1px solid #ddd;
     }
+
     th {
-      background-color: #f8f9fa;
+      background-color: var(--bg-accent);
       font-weight: 600;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      position: sticky;
+      top: 0;
     }
-    tr:hover {
-      background-color: #f5f5f5;
+
+    tr:hover td {
+      background-color: rgba(94, 176, 255, 0.05);
     }
-    .pill {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 0.85em;
-      font-weight: 600;
+
+    tr:last-child td {
+      border-bottom: none;
     }
-    .pending {
-      background-color: #FFF3CD;
-      color: #856404;
-    }
-    .accepted {
-      background-color: #D4EDDA;
-      color: #155724;
-    }
-    .scholarship-list {
-      font-size: 0.8em;
-      margin-top: 4px;
-      display: block;
-    }
+
     a {
-      color: #0066cc;
+      color: var(--text-accent);
       text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
     }
+
     a:hover {
+      color: #7dc8ff;
       text-decoration: underline;
+    }
+
+    a::after {
+      content: "↗";
+      font-size: 0.8em;
+      opacity: 0.7;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      gap: 0.3rem;
+    }
+
+    .pill::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .pill.accepted {
+      background-color: rgba(59, 217, 135, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(59, 217, 135, 0.3);
+    }
+
+    .pill.accepted::before {
+      background-color: var(--success);
+    }
+
+    .pill.pending {
+      background-color: rgba(255, 196, 69, 0.15);
+      color: var(--warning);
+      border: 1px solid rgba(255, 196, 69, 0.3);
+    }
+
+    .pill.pending::before {
+      background-color: var(--warning);
+    }
+
+    .scholarship-list {
+      color: var(--success);
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .dashboard {
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .tagline {
+        font-size: 1.2rem;
+      }
+      
+      .card {
+        min-width: 120px;
+        padding: 1rem;
+      }
+      
+      th, td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Animation for status pills */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .pill.pending {
+      animation: pulse 2s infinite;
     }
   </style>
 </head>
@@ -92,7 +359,7 @@
             <td>1</td>
             <td>National University of Singapore (NUS)</td>
             <td>QS#8 <br> SG#1</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -101,7 +368,7 @@
             <td>2</td>
             <td>University of Hong Kong (HKU)</td>
             <td>QS#11 <br> HK#1</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -110,7 +377,7 @@
             <td>3</td>
             <td>Nanyang Technological University (NTU)</td>
             <td>QS#12 <br> SG#2</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -121,7 +388,7 @@
             <td>4</td>
             <td>University of Edinburgh</td>
             <td>QS#33 <br> UK#4</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -130,7 +397,7 @@
             <td>5</td>
             <td>University of Manchester</td>
             <td>QS#35 <br> UK#6</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -141,7 +408,7 @@
             <td>6</td>
             <td>Brown University</td>
             <td>QS#69 <br> USA#25</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -150,7 +417,7 @@
             <td>7</td>
             <td>University of Illinois Urbana-Champaign (UIUC)</td>
             <td>QS#70 <br> USA#5</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -159,7 +426,7 @@
             <td>8</td>
             <td>University of Glasgow</td>
             <td>QS#79 <br> UK#12</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -177,7 +444,7 @@
             <td>10</td>
             <td>Purdue University</td>
             <td>QS#88 <br> USA#17</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -186,7 +453,7 @@
             <td>11</td>
             <td>University of Nottingham</td>
             <td>QS#97 <br> UK#17</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -195,7 +462,7 @@
             <td>12</td>
             <td>University of Wisconsin–Madison</td>
             <td>QS#110 <br> USA#17</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -206,7 +473,7 @@
             <td>13</td>
             <td>University College Dublin</td>
             <td>QS#118 <br> Ireland#2</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -215,7 +482,7 @@
             <td>14</td>
             <td>Georgia Institute of Technology</td>
             <td>QS#123 <br> USA#9</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -224,7 +491,7 @@
             <td>15</td>
             <td>University of Southern California (USC)</td>
             <td>QS#146 <br> USA#23</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -233,7 +500,7 @@
             <td>16</td>
             <td>University of Liverpool</td>
             <td>QS#149 <br> UK#15</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
@@ -251,7 +518,7 @@
             <td>18</td>
             <td>University of Maryland</td>
             <td>QS#207 <br> USA#13</td>
-            <td><span class="pill pending">-</span></td>
+            <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
