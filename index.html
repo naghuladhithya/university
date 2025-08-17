@@ -8,30 +8,69 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
   <style>
     :root {
-      --bg-primary: #0a0f1a;
-      --bg-secondary: #141a26;
-      --bg-accent: #1e2636;
-      --text-primary: #e2e8f0;
-      --text-secondary: #8a9bb8;
-      --text-accent: #5eb0ff;
-      --success: #3bd987;
-      --warning: #ffc445;
-      --error: #ff6b6b;
-      --applied: #5eb0ff;
-      --border: #2a3446;
-      --border-radius: 10px;
-      --shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --bg-primary: #0a0f1a;
+  --bg-secondary: #141a26;
+  --bg-accent: #1e2636;
+  --text-primary: #e2e8f0;
+  --text-secondary: #8a9bb8;
+  --text-accent: #5eb0ff;
+  --success: #3bd987;
+  --warning: #ffc445;
+  --error: #ff6b6b;
+  --applied: #5eb0ff;
+  --border: #2a3446;
+  --border-radius: 10px;
+  --shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    body {
-      margin: 0;
-      font-family: 'Space Grotesk', sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+   body {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-primary);
+  /* New 3D minimalist background */
+  background-image: 
+    linear-gradient(135deg, rgba(20, 26, 38, 0.8) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(20, 26, 38, 0.8) 25%, transparent 25%),
+    linear-gradient(315deg, rgba(20, 26, 38, 0.8) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(20, 26, 38, 0.8) 25%, transparent 25%);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 0, 30px -30px, 0px 30px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Add subtle floating elements for depth */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(94, 176, 255, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 80% 70%, rgba(59, 217, 135, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 40% 60%, rgba(255, 107, 107, 0.05) 0%, transparent 20%);
+  z-index: -1;
+  animation: float 20s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-5%, -5%);
+  }
+  100% {
+    transform: translate(5%, 5%);
+  }
+}
 
     .dashboard {
       max-width: 1200px;
@@ -39,13 +78,26 @@
       padding: 2rem;
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 3rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
+  header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(10, 15, 26, 0.8) 0%, transparent 100%);
+  transform: translateZ(-1px);
+  z-index: -1;
+}
 
     header::after {
       content: "";
@@ -131,16 +183,31 @@
       overflow: hidden;
     }
 
-    .card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--applied);
-    }
+  .card {
+  background-color: var(--bg-secondary);
+  padding: 1.75rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+  transition: var(--transition);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
 
+.card:hover {
+  transform: translateY(-5px) rotateX(5deg);
+  box-shadow: 
+    0 15px 30px rgba(0, 0, 0, 0.3),
+    0 5px 15px rgba(0, 0, 0, 0.2),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+}
     .card.accepted::before {
       background: var(--success);
     }
@@ -149,10 +216,6 @@
       background: var(--error);
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    }
 
     .card .value {
       font-size: 2.75rem;
@@ -207,6 +270,19 @@
       position: absolute;
       left: 0;
     }
+
+.table-container {
+  max-height: 600px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-secondary);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
 
     .filters {
       display: flex;
