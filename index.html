@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Naghul Adhithya – University Admissions Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
   <style>
     :root {
       --bg-primary: #0a0f1a;
@@ -184,6 +185,74 @@
       left: 0;
     }
 
+    .filters {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
+      gap: 1rem;
+    }
+
+    .filter-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .filter-button {
+      background-color: var(--bg-accent);
+      color: var(--text-primary);
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .filter-button:hover {
+      background-color: var(--bg-secondary);
+    }
+
+    .filter-button::after {
+      content: "▼";
+      font-size: 0.6rem;
+      margin-left: 0.3rem;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: var(--bg-secondary);
+      min-width: 180px;
+      box-shadow: var(--shadow);
+      z-index: 1;
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .dropdown-content a {
+      color: var(--text-primary);
+      padding: 0.8rem 1rem;
+      text-decoration: none;
+      display: block;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--bg-accent);
+      color: var(--text-accent);
+    }
+
+    .filter-dropdown:hover .dropdown-content {
+      display: block;
+    }
+
     table {
       width: 100%;
       border-collapse: separate;
@@ -308,6 +377,29 @@
       line-height: 1.4;
     }
 
+    .country-flag {
+      margin-right: 0.5rem;
+      width: 18px;
+      height: 12px;
+      border-radius: 2px;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+    }
+
+    .ranking-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .world-ranking {
+      font-weight: 600;
+    }
+
+    .country-ranking {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .dashboard {
@@ -330,6 +422,11 @@
       th, td {
         padding: 0.75rem;
         font-size: 0.9rem;
+      }
+
+      .filters {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
 
@@ -369,13 +466,30 @@
     </section>
 
     <section class="table-section">
+      <div class="filters">
+        <div class="filter-dropdown">
+          <button class="filter-button">
+            <span>Filter by Country</span>
+          </button>
+          <div class="dropdown-content">
+            <a href="#" onclick="filterTable('all')">All Countries</a>
+            <a href="#" onclick="filterTable('us')"><span class="flag-icon flag-icon-us"></span> United States</a>
+            <a href="#" onclick="filterTable('uk')"><span class="flag-icon flag-icon-gb"></span> United Kingdom</a>
+            <a href="#" onclick="filterTable('sg')"><span class="flag-icon flag-icon-sg"></span> Singapore</a>
+            <a href="#" onclick="filterTable('hk')"><span class="flag-icon flag-icon-hk"></span> Hong Kong</a>
+            <a href="#" onclick="filterTable('ie')"><span class="flag-icon flag-icon-ie"></span> Ireland</a>
+          </div>
+        </div>
+      </div>
+      
       <h2>Application Status</h2>
-      <table>
+      <table id="applicationsTable">
         <thead>
           <tr>
             <th>#</th>
             <th>University</th>
-            <th>Ranking <br>(QS/Country)</th>
+            <th>Country</th>
+            <th>Ranking</th>
             <th>Status</th>
             <th>Applied</th>
             <th>Decision</th>
@@ -383,192 +497,255 @@
           </tr>
         </thead>
         <tbody>
-          <!-- QS Top 20 -->
-          <tr>
+          <!-- Singapore -->
+          <tr data-country="sg">
             <td>1</td>
             <td>National University of Singapore</td>
-            <td>QS#8 <br> SG#1</td>
+            <td><span class="flag-icon flag-icon-sg"></span> Singapore</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #8</span>
+              <span class="country-ranking">Country #1</span>
+            </td>
             <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
           </tr>
-          <tr>
+          <tr data-country="sg">
             <td>2</td>
-            <td>University of Hong Kong</td>
-            <td>QS#11 <br> HK#1</td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Nanyang Technological University </td>
-            <td>QS#12 <br> SG#2</td>
+            <td>Nanyang Technological University</td>
+            <td><span class="flag-icon flag-icon-sg"></span> Singapore</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #12</span>
+              <span class="country-ranking">Country #2</span>
+            </td>
             <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
           </tr>
           
-          <!-- QS Top 50 -->
-          <tr>
+          <!-- Hong Kong -->
+          <tr data-country="hk">
+            <td>3</td>
+            <td>University of Hong Kong</td>
+            <td><span class="flag-icon flag-icon-hk"></span> Hong Kong</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #11</span>
+              <span class="country-ranking">Country #1</span>
+            </td>
+            <td><span class="pill pending">Pending</span></td>
+            <td>-</td>
+            <td>-</td>
+            <td>—</td>
+          </tr>
+          
+          <!-- UK -->
+          <tr data-country="uk">
             <td>4</td>
             <td>University of Edinburgh</td>
-            <td>QS#33 <br> UK#4</td>
+            <td><span class="flag-icon flag-icon-gb"></span> UK</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #33</span>
+              <span class="country-ranking">Country #4</span>
+            </td>
             <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
           </tr>
-          <tr>
+          <tr data-country="uk">
             <td>5</td>
             <td>University of Manchester</td>
-            <td>QS#35 <br> UK#6</td>
+            <td><span class="flag-icon flag-icon-gb"></span> UK</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #35</span>
+              <span class="country-ranking">Country #6</span>
+            </td>
+            <td><span class="pill pending">Pending</span></td>
+            <td>-</td>
+            <td>-</td>
+            <td>—</td>
+          </tr>
+          <tr data-country="uk">
+            <td>6</td>
+            <td>University of Glasgow</td>
+            <td><span class="flag-icon flag-icon-gb"></span> UK</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #79</span>
+              <span class="country-ranking">Country #12</span>
+            </td>
+            <td><span class="pill pending">Pending</span></td>
+            <td>-</td>
+            <td>-</td>
+            <td>—</td>
+          </tr>
+          <tr data-country="uk">
+            <td>7</td>
+            <td>University of Nottingham</td>
+            <td><span class="flag-icon flag-icon-gb"></span> UK</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #97</span>
+              <span class="country-ranking">Country #17</span>
+            </td>
+            <td><span class="pill pending">Pending</span></td>
+            <td>-</td>
+            <td>-</td>
+            <td>—</td>
+          </tr>
+          <tr data-country="uk">
+            <td>8</td>
+            <td>University of Liverpool</td>
+            <td><span class="flag-icon flag-icon-gb"></span> UK</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #149</span>
+              <span class="country-ranking">Country #15</span>
+            </td>
             <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
           </tr>
           
-          <!-- QS Top 100 -->
-          <tr>
-            <td>6</td>
-            <td>Brown University</td>
-            <td>QS#69 <br> USA#25</td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>University of Illinois Urbana-Champaign </td>
-            <td>QS#70 <br> USA#5</td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>University of Glasgow</td>
-            <td>QS#79 <br> UK#12</td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr>
+          <!-- USA -->
+          <tr data-country="us">
             <td>9</td>
+            <td>Brown University</td>
+            <td><span class="flag-icon flag-icon-us"></span> USA</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #69</span>
+              <span class="country-ranking">Country #25</span>
+            </td>
+            <td><span class="pill pending">Pending</span></td>
+            <td>-</td>
+            <td>-</td>
+            <td>—</td>
+          </tr>
+          <tr data-country="us">
+            <td>10</td>
+            <td>University of Illinois Urbana-Champaign</td>
+            <td><span class="flag-icon flag-icon-us"></span> USA</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #70</span>
+              <span class="country-ranking">Country #5</span>
+            </td>
+            <td><span class="pill pending">Pending</span></td>
+            <td>-</td>
+            <td>-</td>
+            <td>—</td>
+          </tr>
+          <tr data-country="us">
+            <td>11</td>
             <td>Penn State University</td>
-            <td>QS#82 <br> USA#24</td>
+            <td><span class="flag-icon flag-icon-us"></span> USA</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #82</span>
+              <span class="country-ranking">Country #24</span>
+            </td>
             <td><span class="pill applied">Applied</span></td>
             <td>Aug 12, 2025</td>
             <td>Pending</td>
             <td>—</td>
           </tr>
-          <tr>
-            <td>10</td>
-            <td>Purdue University</td>
-            <td>QS#88 <br> USA#17</td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr>
-            <td>11</td>
-            <td>University of Nottingham</td>
-            <td>QS#97 <br> UK#17</td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr>
+          <tr data-country="us">
             <td>12</td>
-            <td>University of Wisconsin–Madison</td>
-            <td>QS#110 <br> USA#17</td>
+            <td>Purdue University</td>
+            <td><span class="flag-icon flag-icon-us"></span> USA</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #88</span>
+              <span class="country-ranking">Country #17</span>
+            </td>
             <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
           </tr>
-          
-          <!-- QS 100-200 -->
-          <tr>
+          <tr data-country="us">
             <td>13</td>
-            <td>University College Dublin</td>
-            <td>QS#118 <br> Ireland#2</td>
+            <td>University of Wisconsin–Madison</td>
+            <td><span class="flag-icon flag-icon-us"></span> USA</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #110</span>
+              <span class="country-ranking">Country #17</span>
+            </td>
             <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
           </tr>
-          <tr>
+          <tr data-country="us">
             <td>14</td>
             <td>Georgia Institute of Technology</td>
-            <td>QS#123 <br> USA#9</td>
+            <td><span class="flag-icon flag-icon-us"></span> USA</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #123</span>
+              <span class="country-ranking">Country #9</span>
+            </td>
             <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
           </tr>
-          <tr>
+          <tr data-country="us">
             <td>15</td>
             <td>University of Southern California</td>
-            <td>QS#146 <br> USA#23</td>
+            <td><span class="flag-icon flag-icon-us"></span> USA</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #146</span>
+              <span class="country-ranking">Country #23</span>
+            </td>
             <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
           </tr>
-          <tr>
+          <tr data-country="us">
             <td>16</td>
-            <td>University of Liverpool</td>
-            <td>QS#149 <br> UK#15</td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr>
-            <td>17</td>
             <td>Arizona State University</td>
-            <td>QS#173 <br> USA#36</td>
+            <td><span class="flag-icon flag-icon-us"></span> USA</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #173</span>
+              <span class="country-ranking">Country #36</span>
+            </td>
             <td><span class="pill applied">Applied</span></td>
             <td>July 1, 2025</td>
             <td>Pending</td>
             <td>—</td>
           </tr>
-          <tr>
-            <td>18</td>
+          <tr data-country="us">
+            <td>17</td>
             <td>University of Maryland</td>
-            <td>QS#207 <br> USA#13</td>
+            <td><span class="flag-icon flag-icon-us"></span> USA</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #207</span>
+              <span class="country-ranking">Country #13</span>
+            </td>
             <td><span class="pill pending">Pending</span></td>
             <td>-</td>
             <td>-</td>
             <td>—</td>
           </tr>
-          
-          <!-- QS 400+ -->
-          <tr>
-            <td>19</td>
+          <tr data-country="us">
+            <td>18</td>
             <td>Iowa State University</td>
-            <td>QS#449 <br> USA#54</td>
+            <td><span class="flag-icon flag-icon-us"></span> USA</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #449</span>
+              <span class="country-ranking">Country #54</span>
+            </td>
             <td><span class="pill accepted">Accepted</span></td>
             <td>July 1, 2025</td>
             <td>July 4, 2025</td>
             <td><a href="Iowa.pdf" target="_blank">Offer Letter</a></td>
           </tr>
-          
-          <!-- QS 1000+ -->
-          <tr>
-            <td>20</td>
-            <td>Florida Institute of Technology</td> 
-            <td>QS#1000 <br> USA#177</td>
+          <tr data-country="us">
+            <td>19</td>
+            <td>Florida Institute of Technology</td>
+            <td><span class="flag-icon flag-icon-us"></span> USA</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #1000+</span>
+              <span class="country-ranking">Country #177</span>
+            </td>
             <td>
               <span class="pill accepted">Accepted</span><br>
               <span class="scholarship-list">Scholarships:<br>$17,500/year</span>
@@ -580,9 +757,42 @@
               <a href="Florida Tech Scholarship.pdf" target="_blank">Scholarship Letter</a>
             </td>
           </tr>
+          
+          <!-- Ireland -->
+          <tr data-country="ie">
+            <td>20</td>
+            <td>University College Dublin</td>
+            <td><span class="flag-icon flag-icon-ie"></span> Ireland</td>
+            <td class="ranking-cell">
+              <span class="world-ranking">QS #118</span>
+              <span class="country-ranking">Country #2</span>
+            </td>
+            <td><span class="pill pending">Pending</span></td>
+            <td>-</td>
+            <td>-</td>
+            <td>—</td>
+          </tr>
         </tbody>
       </table>
     </section>
   </div>
+
+  <script>
+    function filterTable(country) {
+      const rows = document.querySelectorAll('#applicationsTable tbody tr');
+      
+      rows.forEach(row => {
+        if (country === 'all') {
+          row.style.display = '';
+        } else {
+          if (row.getAttribute('data-country') === country) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        }
+      });
+    }
+  </script>
 </body>
 </html>
