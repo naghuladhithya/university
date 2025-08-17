@@ -1,798 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Naghul Adhithya – University Admissions Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
-  <style>
-    :root {
-      --bg-primary: #0a0f1a;
-      --bg-secondary: #141a26;
-      --bg-accent: #1e2636;
-      --text-primary: #e2e8f0;
-      --text-secondary: #8a9bb8;
-      --text-accent: #5eb0ff;
-      --success: #3bd987;
-      --warning: #ffc445;
-      --error: #ff6b6b;
-      --applied: #5eb0ff;
-      --border: #2a3446;
-      --border-radius: 10px;
-      --shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Space Grotesk', sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .dashboard {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 2rem;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 3rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-
-    header::after {
-      content: "";
-      position: absolute;
-      bottom: -1px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--text-accent), var(--success));
-      border-radius: 3px;
-    }
-
-    h1 {
-      font-size: 2.75rem;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      background: linear-gradient(90deg, var(--text-accent), #7dc8ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-    }
-
-    .tagline {
-      font-size: 1.5rem;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-
-    .subtag {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto;
-      opacity: 0.9;
-    }
-
-    .summary {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
-    }
-
-    .card {
-      background-color: var(--bg-secondary);
-      padding: 1.75rem;
-      border-radius: var(--border-radius);
-      text-align: center;
-      flex: 1;
-      min-width: 200px;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--applied);
-    }
-
-    .card.accepted::before {
-      background: var(--success);
-    }
-
-    .card.rejected::before {
-      background: var(--error);
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .card .value {
-      font-size: 2.75rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .card .label {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 500;
-    }
-
-    .card.accepted .value {
-      color: var(--success);
-    }
-
-    .card.rejected .value {
-      color: var(--error);
-    }
-
-    .card.applied .value {
-      color: var(--applied);
-    }
-
-    .table-section {
-      margin-top: 3rem;
-    }
-
-    .table-section h2 {
-      font-size: 1.75rem;
-      margin-bottom: 1.75rem;
-      color: var(--text-primary);
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      position: relative;
-      padding-left: 1rem;
-    }
-
-    .table-section h2::before {
-      content: "";
-      display: block;
-      width: 6px;
-      height: 24px;
-      background: linear-gradient(to bottom, var(--text-accent), var(--success));
-      border-radius: 3px;
-      position: absolute;
-      left: 0;
-    }
-
-    .filters {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 1rem;
-      gap: 1rem;
-    }
-
-    .filter-dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .filter-button {
-      background-color: var(--bg-accent);
-      color: var(--text-primary);
-      padding: 0.6rem 1.2rem;
-      border: 1px solid var(--border);
-      border-radius: var(--border-radius);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: inherit;
-      font-size: 0.9rem;
-      transition: var(--transition);
-    }
-
-    .filter-button:hover {
-      background-color: var(--bg-secondary);
-    }
-
-    .filter-button::after {
-      content: "▼";
-      font-size: 0.6rem;
-      margin-left: 0.3rem;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      right: 0;
-      background-color: var(--bg-secondary);
-      min-width: 180px;
-      box-shadow: var(--shadow);
-      z-index: 1;
-      border-radius: var(--border-radius);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-
-    .dropdown-content a {
-      color: var(--text-primary);
-      padding: 0.8rem 1rem;
-      text-decoration: none;
-      display: block;
-      transition: var(--transition);
-      font-size: 0.9rem;
-    }
-
-    .dropdown-content a:hover {
-      background-color: var(--bg-accent);
-      color: var(--text-accent);
-    }
-
-    .filter-dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      background-color: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--border-radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    th, td {
-      padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid var(--border);
-      text-align: left;
-    }
-
-    th {
-      background-color: var(--bg-accent);
-      font-weight: 600;
-      color: var(--text-primary);
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      position: sticky;
-      top: 0;
-    }
-
-    tr:hover td {
-      background-color: rgba(94, 176, 255, 0.05);
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    a {
-      color: var(--text-accent);
-      text-decoration: none;
-      font-weight: 500;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    a:hover {
-      color: #7dc8ff;
-      text-decoration: underline;
-    }
-
-    a::after {
-      content: "↗";
-      font-size: 0.8em;
-      opacity: 0.7;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.4rem 0.9rem;
-      border-radius: 9999px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      gap: 0.3rem;
-    }
-
-    .pill::before {
-      content: "";
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    .pill.accepted {
-      background-color: rgba(59, 217, 135, 0.15);
-      color: var(--success);
-      border: 1px solid rgba(59, 217, 135, 0.3);
-    }
-
-    .pill.accepted::before {
-      background-color: var(--success);
-    }
-
-    .pill.pending {
-      background-color: rgba(255, 196, 69, 0.15);
-      color: var(--warning);
-      border: 1px solid rgba(255, 196, 69, 0.3);
-    }
-
-    .pill.pending::before {
-      background-color: var(--warning);
-    }
-
-    .pill.applied {
-      background-color: rgba(94, 176, 255, 0.15);
-      color: var(--applied);
-      border: 1px solid rgba(94, 176, 255, 0.3);
-    }
-
-    .pill.applied::before {
-      background-color: var(--applied);
-    }
-
-    .pill.rejected {
-      background-color: rgba(255, 107, 107, 0.15);
-      color: var(--error);
-      border: 1px solid rgba(255, 107, 107, 0.3);
-    }
-
-    .pill.rejected::before {
-      background-color: var(--error);
-    }
-
-    .scholarship-list {
-      color: var(--success);
-      display: block;
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      line-height: 1.4;
-    }
-
-    .country-flag {
-      margin-right: 0.5rem;
-      width: 18px;
-      height: 12px;
-      border-radius: 2px;
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
-    }
-
-    .ranking-cell {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .world-ranking {
-      font-weight: 600;
-    }
-
-    .country-ranking {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .dashboard {
-        padding: 1rem;
-      }
-      
-      h1 {
-        font-size: 2rem;
-      }
-      
-      .tagline {
-        font-size: 1.2rem;
-      }
-      
-      .card {
-        min-width: 120px;
-        padding: 1rem;
-      }
-      
-      th, td {
-        padding: 0.75rem;
-        font-size: 0.9rem;
-      }
-
-      .filters {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    /* Animation for status pills */
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    .pill.pending {
-      animation: pulse 2s infinite;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naghul Adhithya - University Admissions Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #f4f6f8;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+  }
+  h1, h2 {
+    text-align: center;
+  }
+  .summary {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+  .summary div {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 150px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin: 10px;
+  }
+  .summary div span {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+  .filters {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  select {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  th {
+    background: #1976d2;
+    color: #fff;
+    cursor: pointer;
+  }
+  tr:hover {
+    background: #f1f1f1;
+  }
+  .status-pending { color: #ff9800; font-weight: bold; }
+  .status-applied { color: #2196f3; font-weight: bold; }
+  .status-accepted { color: #4caf50; font-weight: bold; }
+  .status-rejected { color: #f44336; font-weight: bold; }
+  a.document-link {
+    color: #1976d2;
+    text-decoration: none;
+  }
+  a.document-link:hover {
+    text-decoration: underline;
+  }
+</style>
 </head>
 <body>
-  <div class="dashboard">
-    <header>
-      <h1>Naghul Adhithya</h1>
-      <p class="tagline">University Admissions Dashboard</p>
-      <p class="subtag">Fall 2026 Applications • Status Tracking • Documents & Scholarships</p>
-    </header>
 
-    <section class="summary">
-      <div class="card applied">
-        <p class="value">4</p>
-        <p class="label">Applied</p>
-      </div>
-      <div class="card accepted">
-        <p class="value">2</p>
-        <p class="label">Accepted</p>
-      </div>
-      <div class="card rejected">
-        <p class="value">0</p>
-        <p class="label">Rejected</p>
-      </div>
-    </section>
+<h1>Naghul Adhithya</h1>
+<h2>University Admissions Dashboard - Fall 2026</h2>
 
-    <section class="table-section">
-      <div class="filters">
-        <div class="filter-dropdown">
-          <button class="filter-button">
-            <span>Filter by Country</span>
-          </button>
-          <div class="dropdown-content">
-            <a href="#" onclick="filterTable('all')">All Countries</a>
-            <a href="#" onclick="filterTable('us')"><span class="flag-icon flag-icon-us"></span> United States</a>
-            <a href="#" onclick="filterTable('uk')"><span class="flag-icon flag-icon-gb"></span> United Kingdom</a>
-            <a href="#" onclick="filterTable('sg')"><span class="flag-icon flag-icon-sg"></span> Singapore</a>
-            <a href="#" onclick="filterTable('hk')"><span class="flag-icon flag-icon-hk"></span> Hong Kong</a>
-            <a href="#" onclick="filterTable('ie')"><span class="flag-icon flag-icon-ie"></span> Ireland</a>
-          </div>
-        </div>
-      </div>
-      
-      <h2>Application Status</h2>
-      <table id="applicationsTable">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>University</th>
-            <th>Country</th>
-            <th>Ranking</th>
-            <th>Status</th>
-            <th>Applied</th>
-            <th>Decision</th>
-            <th>Documents</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Singapore -->
-          <tr data-country="sg">
-            <td>1</td>
-            <td>National University of Singapore</td>
-            <td><span class="flag-icon flag-icon-sg"></span> Singapore</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #8</span>
-              <span class="country-ranking">Country #1</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="sg">
-            <td>2</td>
-            <td>Nanyang Technological University</td>
-            <td><span class="flag-icon flag-icon-sg"></span> Singapore</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #12</span>
-              <span class="country-ranking">Country #2</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          
-          <!-- Hong Kong -->
-          <tr data-country="hk">
-            <td>3</td>
-            <td>University of Hong Kong</td>
-            <td><span class="flag-icon flag-icon-hk"></span> Hong Kong</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #11</span>
-              <span class="country-ranking">Country #1</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          
-          <!-- UK -->
-          <tr data-country="uk">
-            <td>4</td>
-            <td>University of Edinburgh</td>
-            <td><span class="flag-icon flag-icon-gb"></span> UK</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #33</span>
-              <span class="country-ranking">Country #4</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="uk">
-            <td>5</td>
-            <td>University of Manchester</td>
-            <td><span class="flag-icon flag-icon-gb"></span> UK</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #35</span>
-              <span class="country-ranking">Country #6</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="uk">
-            <td>6</td>
-            <td>University of Glasgow</td>
-            <td><span class="flag-icon flag-icon-gb"></span> UK</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #79</span>
-              <span class="country-ranking">Country #12</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="uk">
-            <td>7</td>
-            <td>University of Nottingham</td>
-            <td><span class="flag-icon flag-icon-gb"></span> UK</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #97</span>
-              <span class="country-ranking">Country #17</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="uk">
-            <td>8</td>
-            <td>University of Liverpool</td>
-            <td><span class="flag-icon flag-icon-gb"></span> UK</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #149</span>
-              <span class="country-ranking">Country #15</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          
-          <!-- USA -->
-          <tr data-country="us">
-            <td>9</td>
-            <td>Brown University</td>
-            <td><span class="flag-icon flag-icon-us"></span> USA</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #69</span>
-              <span class="country-ranking">Country #25</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="us">
-            <td>10</td>
-            <td>University of Illinois Urbana-Champaign</td>
-            <td><span class="flag-icon flag-icon-us"></span> USA</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #70</span>
-              <span class="country-ranking">Country #5</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="us">
-            <td>11</td>
-            <td>Penn State University</td>
-            <td><span class="flag-icon flag-icon-us"></span> USA</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #82</span>
-              <span class="country-ranking">Country #24</span>
-            </td>
-            <td><span class="pill applied">Applied</span></td>
-            <td>Aug 12, 2025</td>
-            <td>Pending</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="us">
-            <td>12</td>
-            <td>Purdue University</td>
-            <td><span class="flag-icon flag-icon-us"></span> USA</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #88</span>
-              <span class="country-ranking">Country #17</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="us">
-            <td>13</td>
-            <td>University of Wisconsin–Madison</td>
-            <td><span class="flag-icon flag-icon-us"></span> USA</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #110</span>
-              <span class="country-ranking">Country #17</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="us">
-            <td>14</td>
-            <td>Georgia Institute of Technology</td>
-            <td><span class="flag-icon flag-icon-us"></span> USA</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #123</span>
-              <span class="country-ranking">Country #9</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="us">
-            <td>15</td>
-            <td>University of Southern California</td>
-            <td><span class="flag-icon flag-icon-us"></span> USA</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #146</span>
-              <span class="country-ranking">Country #23</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="us">
-            <td>16</td>
-            <td>Arizona State University</td>
-            <td><span class="flag-icon flag-icon-us"></span> USA</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #173</span>
-              <span class="country-ranking">Country #36</span>
-            </td>
-            <td><span class="pill applied">Applied</span></td>
-            <td>July 1, 2025</td>
-            <td>Pending</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="us">
-            <td>17</td>
-            <td>University of Maryland</td>
-            <td><span class="flag-icon flag-icon-us"></span> USA</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #207</span>
-              <span class="country-ranking">Country #13</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-          <tr data-country="us">
-            <td>18</td>
-            <td>Iowa State University</td>
-            <td><span class="flag-icon flag-icon-us"></span> USA</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #449</span>
-              <span class="country-ranking">Country #54</span>
-            </td>
-            <td><span class="pill accepted">Accepted</span></td>
-            <td>July 1, 2025</td>
-            <td>July 4, 2025</td>
-            <td><a href="Iowa.pdf" target="_blank">Offer Letter</a></td>
-          </tr>
-          <tr data-country="us">
-            <td>19</td>
-            <td>Florida Institute of Technology</td>
-            <td><span class="flag-icon flag-icon-us"></span> USA</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #1000+</span>
-              <span class="country-ranking">Country #177</span>
-            </td>
-            <td>
-              <span class="pill accepted">Accepted</span><br>
-              <span class="scholarship-list">Scholarships:<br>$17,500/year</span>
-            </td>
-            <td>June 27, 2025</td>
-            <td>July 2, 2025</td>
-            <td>
-              <a href="Florida Tech.pdf" target="_blank">Offer Letter</a><br>
-              <a href="Florida Tech Scholarship.pdf" target="_blank">Scholarship Letter</a>
-            </td>
-          </tr>
-          
-          <!-- Ireland -->
-          <tr data-country="ie">
-            <td>20</td>
-            <td>University College Dublin</td>
-            <td><span class="flag-icon flag-icon-ie"></span> Ireland</td>
-            <td class="ranking-cell">
-              <span class="world-ranking">QS #118</span>
-              <span class="country-ranking">Country #2</span>
-            </td>
-            <td><span class="pill pending">Pending</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td>—</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </div>
+<div class="summary">
+  <div>📬 Applied<span id="applied-count">4</span></div>
+  <div>✅ Accepted<span id="accepted-count">2</span></div>
+  <div>❌ Rejected<span id="rejected-count">0</span></div>
+  <div>💰 Scholarships<span id="scholarship-count">$17,500/year</span></div>
+</div>
 
-  <script>
-    function filterTable(country) {
-      const rows = document.querySelectorAll('#applicationsTable tbody tr');
-      
-      rows.forEach(row => {
-        if (country === 'all') {
-          row.style.display = '';
-        } else {
-          if (row.getAttribute('data-country') === country) {
-            row.style.display = '';
-          } else {
-            row.style.display = 'none';
-          }
-        }
-      });
-    }
-  </script>
+<div class="filters">
+  Filter by Country: 
+  <select id="countryFilter">
+    <option value="all">All</option>
+  </select>
+  Status: 
+  <select id="statusFilter">
+    <option value="all">All</option>
+    <option value="Pending">Pending</option>
+    <option value="Applied">Applied</option>
+    <option value="Accepted">Accepted</option>
+    <option value="Rejected">Rejected</option>
+  </select>
+</div>
+
+<table id="admissionsTable">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>University</th>
+      <th>Country</th>
+      <th>QS / Country Ranking</th>
+      <th>Status</th>
+      <th>Applied Date</th>
+      <th>Decision Date</th>
+      <th>Documents</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<script>
+const applications = [
+  { id:1, uni:"National University of Singapore", country:"Singapore", qs:"QS #8 / Country #1", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:2, uni:"Nanyang Technological University", country:"Singapore", qs:"QS #12 / Country #2", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:3, uni:"University of Hong Kong", country:"Hong Kong", qs:"QS #11 / Country #1", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:4, uni:"University of Edinburgh", country:"UK", qs:"QS #33 / Country #4", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:5, uni:"University of Manchester", country:"UK", qs:"QS #35 / Country #6", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:6, uni:"University of Glasgow", country:"UK", qs:"QS #79 / Country #12", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:7, uni:"University of Nottingham", country:"UK", qs:"QS #97 / Country #17", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:8, uni:"University of Liverpool", country:"UK", qs:"QS #149 / Country #15", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:9, uni:"Brown University", country:"USA", qs:"QS #69 / Country #25", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:10, uni:"University of Illinois Urbana-Champaign", country:"USA", qs:"QS #70 / Country #5", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:11, uni:"Penn State University", country:"USA", qs:"QS #82 / Country #24", status:"Applied", applied:"Aug 12, 2025", decision:"Pending", doc:"—" },
+  { id:12, uni:"Purdue University", country:"USA", qs:"QS #88 / Country #17", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:13, uni:"University of Wisconsin–Madison", country:"USA", qs:"QS #110 / Country #17", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:14, uni:"Georgia Institute of Technology", country:"USA", qs:"QS #123 / Country #9", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:15, uni:"University of Southern California", country:"USA", qs:"QS #146 / Country #23", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:16, uni:"Arizona State University", country:"USA", qs:"QS #173 / Country #36", status:"Applied", applied:"July 1, 2025", decision:"Pending", doc:"—" },
+  { id:17, uni:"University of Maryland", country:"USA", qs:"QS #207 / Country #13", status:"Pending", applied:"-", decision:"-", doc:"—" },
+  { id:18, uni:"Iowa State University", country:"USA", qs:"QS #449 / Country #54", status:"Accepted", applied:"July 1, 2025", decision:"July 4, 2025", doc:"<a class='document-link' href='#'>Offer Letter</a>" },
+  { id:19, uni:"Florida Institute of Technology", country:"USA", qs:"QS #1000+ / Country #177", status:"Accepted", applied:"June 27, 2025", decision:"July 2, 2025", doc:"<a class='document-link' href='#'>Offer + Scholarship</a>" },
+  { id:20, uni:"University College Dublin", country:"Ireland", qs:"QS #118 / Country #2", status:"Pending", applied:"-", decision:"-", doc:"—" }
+];
+
+function populateTable(filterCountry="all", filterStatus="all") {
+  const tbody = document.querySelector('#admissionsTable tbody');
+  tbody.innerHTML = '';
+  applications
+    .filter(app => (filterCountry === "all" || app.country === filterCountry) &&
+                   (filterStatus === "all" || app.status === filterStatus))
+    .forEach(app => {
+      let statusClass = "";
+      if(app.status === "Pending") statusClass = "status-pending";
+      if(app.status === "Applied") statusClass = "status-applied";
+      if(app.status === "Accepted") statusClass = "status-accepted";
+      if(app.status === "Rejected") statusClass = "status-rejected";
+      tbody.innerHTML += `
+      <tr>
+        <td>${app.id}</td>
+        <td>${app.uni}</td>
+        <td>${app.country}</td>
+        <td>${app.qs}</td>
+        <td class="${statusClass}">${app.status}</td>
+        <td>${app.applied}</td>
+        <td>${app.decision}</td>
+        <td>${app.doc}</td>
+      </tr>
+      `;
+    });
+}
+
+// Populate country filter dynamically
+const countrySelect = document.getElementById('countryFilter');
+const uniqueCountries = [...new Set(applications.map(app => app.country))];
+uniqueCountries.forEach(c => {
+  const option = document.createElement('option');
+  option.value = c;
+  option.textContent = c;
+  countrySelect.appendChild(option);
+});
+
+// Event listeners for filters
+countrySelect.addEventListener('change', () => {
+  populateTable(countrySelect.value, document.getElementById('statusFilter').value);
+});
+document.getElementById('statusFilter').addEventListener('change', () => {
+  populateTable(countrySelect.value, document.getElementById('statusFilter').value);
+});
+
+// Initial table load
+populateTable();
+</script>
+
 </body>
 </html>
