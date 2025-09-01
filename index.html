@@ -1,1093 +1,851 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Naghul Adhithya – University Admissions Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
-  <style>
-    :root {
-
-  --bg-primary: #0a0f1a;
-  --bg-secondary: #141a26;
-  --bg-accent: #1e2636;
-  --text-primary: #e2e8f0;
-  --text-secondary: #8a9bb8;
-  --text-accent: #5eb0ff;
-  --success: #3bd987;
-  --warning: #ffc445;
-  --error: #ff6b6b;
-  --applied: #5eb0ff;
-  --border: #2a3446;
-  --border-radius: 10px;
-  --shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-  --transition: all 0.3s cubic-bezier(0., 0, 0.2, 1);
-    }
-
-   body {
-  margin: 0;
-  font-family: 'Space Grotesk', sans-serif;
-  color: var(--text-primary);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  background-color: var(--bg-primary);
-  /* New 3D minimalist background */
-  background-image: 
-    linear-gradient(135deg, rgba(20, 26, 38, 0.8) 25%, transparent 25%),
-    linear-gradient(225deg, rgba(20, 26, 38, 0.8) 25%, transparent 25%),
-    linear-gradient(315deg, rgba(20, 26, 38, 0.8) 25%, transparent 25%),
-    linear-gradient(45deg, rgba(20, 26, 38, 0.8) 25%, transparent 25%);
-  background-size: 60px 60px;
-  background-position: 0 0, 30px 0, 30px -30px, 0px 30px;
-  position: relative;
-  overflow-x: hidden;
-}
-
-/* Add subtle floating elements for depth */
-body::before {
-  content: "";
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(94, 176, 255, 0.05) 0%, transparent 20%),
-    radial-gradient(circle at 80% 70%, rgba(59, 217, 135, 0.05) 0%, transparent 20%),
-    radial-gradient(circle at 40% 60%, rgba(255, 107, 107, 0.05) 0%, transparent 20%);
-  z-index: -1;
-  animation: float 20s ease-in-out infinite alternate;
-}
-
-@keyframes float {
-  0% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(-5%, -5%);
-  }
-  100% {
-    transform: translate(5%, 5%);
-  }
-}
-
-    .dashboard {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 2rem;
-    }
-
-  header {
-  text-align: center;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
-  position: relative;
-  transform-style: preserve-3d;
-}
-
-header::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(10, 15, 26, 0.8) 0%, transparent 100%);
-  transform: translateZ(-1px);
-  z-index: -1;
-}
-
-    header::after {
-      content: "";
-      position: absolute;
-      bottom: -1px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--text-accent), var(--success));
-      border-radius: 3px;
-    }
-
-    h1 {
-      font-size: 2.75rem;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      background: linear-gradient(90deg, var(--text-accent), #7dc8ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-    }
-
-    .tagline {
-      font-size: 1.5rem;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-
-    .subtag {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto;
-      opacity: 0.9;
-    }
-
-    .portfolio-link {
-      display: inline-block;
-      margin-top: 1rem;
-      color: var(--text-accent);
-      text-decoration: none;
-      font-weight: 500;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .portfolio-link:hover {
-      color: #7dc8ff;
-      text-decoration: underline;
-    }
-
-    .portfolio-link::after {
-      content: "↗";
-      font-size: 0.8em;
-      opacity: 0.7;
-    }
-
-    .summary {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
-    }
-
-    .card {
-      background-color: var(--bg-secondary);
-      padding: 1.75rem;
-      border-radius: var(--border-radius);
-      text-align: center;
-      flex: 1;
-      min-width: 200px;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-
-  .card {
-  background-color: var(--bg-secondary);
-  padding: 1.75rem;
-  border-radius: var(--border-radius);
-  text-align: center;
-  flex: 1;
-  min-width: 200px;
-  box-shadow: 
-    0 4px 6px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.08),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
-  transition: var(--transition);
-  border: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-  transform-style: preserve-3d;
-}
-
-.card:hover {
-  transform: translateY(-5px) rotateX(5deg);
-  box-shadow: 
-    0 15px 30px rgba(0, 0, 0, 0.3),
-    0 5px 15px rgba(0, 0, 0, 0.2),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
-}
-    .card.accepted::before {
-      background: var(--success);
-    }
-
-    .card.rejected::before {
-      background: var(--error);
-    }
-
-
-    .card .value {
-      font-size: 2.75rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .card .label {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 500;
-    }
-
-    .card.accepted .value {
-      color: var(--success);
-    }
-
-    .card.rejected .value {
-      color: var(--error);
-    }
-
-    .card.applied .value {
-      color: var(--applied);
-    }
-
-    .table-section {
-      margin-top: 3rem;
-    }
-
-    .table-section h2 {
-      font-size: 1.75rem;
-      margin-bottom: 1.75rem;
-      color: var(--text-primary);
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      position: relative;
-      padding-left: 1rem;
-    }
-
-    .table-section h2::before {
-      content: "";
-      display: block;
-      width: 6px;
-      height: 24px;
-      background: linear-gradient(to bottom, var(--text-accent), var(--success));
-      border-radius: 3px;
-      position: absolute;
-      left: 0;
-    }
-
-.table-container {
-  max-height: 600px;
-  overflow-y: auto;
-  border: 1px solid var(--border);
-  border-radius: var(--border-radius);
-  background-color: var(--bg-secondary);
-  box-shadow: 
-    0 4px 6px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.08),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
-}
-
-
-    .filters {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 1rem;
-      gap: 1rem;
-    }
-
-    .filter-dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .filter-button {
-      background-color: var(--bg-accent);
-      color: var(--text-primary);
-      padding: 0.6rem 1.2rem;
-      border: 1px solid var(--border);
-      border-radius: var(--border-radius);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: inherit;
-      font-size: 0.9rem;
-      transition: var(--transition);
-    }
-
-    .filter-button:hover {
-      background-color: var(--bg-secondary);
-    }
-
-    .filter-button::after {
-      content: "▼";
-      font-size: 0.6rem;
-      margin-left: 0.3rem;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      right: 0;
-      background-color: var(--bg-secondary);
-      min-width: 180px;
-      box-shadow: var(--shadow);
-      z-index: 1;
-      border-radius: var(--border-radius);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-
-    .dropdown-content.show {
-      display: block;
-    }
-
-    .dropdown-content a {
-      color: var(--text-primary);
-      padding: 0.8rem 1rem;
-      text-decoration: none;
-      display: block;
-      transition: var(--transition);
-      font-size: 0.9rem;
-    }
-
-    .dropdown-content a:hover {
-      background-color: var(--bg-accent);
-      color: var(--text-accent);
-    }
-
-    .table-container {
-      max-height: 600px;
-      overflow-y: auto;
-      border: 1px solid var(--border);
-      border-radius: var(--border-radius);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      background-color: var(--bg-secondary);
-    }
-
-    th, td {
-      padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid var(--border);
-      text-align: left;
-    }
-
-    th {
-      background-color: var(--bg-accent);
-      font-weight: 600;
-      color: var(--text-primary);
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    th.sortable {
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    th.sortable:hover {
-      background-color: var(--bg-primary);
-    }
-
-    th.sortable::after {
-      content: "⇅";
-      margin-left: 0.5rem;
-      font-size: 0.8rem;
-      opacity: 0.5;
-      display: inline-block;
-      transition: var(--transition);
-    }
-
-    th.sortable.asc::after {
-      content: "↑";
-      opacity: 1;
-    }
-
-    th.sortable.desc::after {
-      content: "↓";
-      opacity: 1;
-    }
-
-    tr:hover td {
-      background-color: rgba(94, 176, 255, 0.05);
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    a {
-      color: var(--text-accent);
-      text-decoration: none;
-      font-weight: 500;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    a:hover {
-      color: #7dc8ff;
-      text-decoration: underline;
-    }
-
-    a::after {
-      content: "↗";
-      font-size: 0.8em;
-      opacity: 0.7;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.4rem 0.9rem;
-      border-radius: 9999px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      gap: 0.3rem;
-    }
-
-    .pill::before {
-      content: "";
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    .pill.accepted {
-      background-color: rgba(59, 217, 135, 0.15);
-      color: var(--success);
-      border: 1px solid rgba(59, 217, 135, 0.3);
-    }
-
-    .pill.accepted::before {
-      background-color: var(--success);
-    }
-
-    .pill.pending {
-      background-color: rgba(255, 196, 69, 0.15);
-      color: var(--warning);
-      border: 1px solid rgba(255, 196, 69, 0.3);
-    }
-
-    .pill.pending::before {
-      background-color: var(--warning);
-    }
-
-    .pill.applied {
-      background-color: rgba(94, 176, 255, 0.15);
-      color: var(--applied);
-      border: 1px solid rgba(94, 176, 255, 0.3);
-    }
-
-    .pill.applied::before {
-      background-color: var(--applied);
-    }
-
-    .pill.rejected {
-      background-color: rgba(255, 107, 107, 0.15);
-      color: var(--error);
-      border: 1px solid rgba(255, 107, 107, 0.3);
-    }
-
-    .pill.rejected::before {
-      background-color: var(--error);
-    }
-
-    .scholarship-list {
-      color: var(--success);
-      display: block;
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      line-height: 1.4;
-    }
-
-    .university-name {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .flag-icon {
-      width: 18px;
-      height: 12px;
-      border-radius: 2px;
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
-    }
-
-    .ranking-cell {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .world-ranking {
-      font-weight: 600;
-    }
-
-    .country-ranking {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .dashboard {
-        padding: 1rem;
-      }
-      
-      h1 {
-        font-size: 2rem;
-      }
-      
-      .tagline {
-        font-size: 1.2rem;
-      }
-      
-      .card {
-        min-width: 120px;
-        padding: 1rem;
-      }
-      
-      th, td {
-        padding: 0.75rem;
-        font-size: 0.9rem;
-      }
-
-      .filters {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      /* Stack table cells vertically on small screens */
-      .table-container {
-        border: none;
-        max-height: none;
-      }
-
-      table {
-        border: 0;
-      }
-
-      table thead {
-        display: none;
-      }
-
-      table tr {
-        display: block;
-        margin-bottom: 1rem;
-        border: 1px solid var(--border);
-        border-radius: var(--border-radius);
-      }
-
-      table td {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem 1rem;
-        border-bottom: 1px solid var(--border);
-        text-align: right;
-      }
-
-      table td:last-child {
-        border-bottom: none;
-      }
-
-      table td::before {
-        content: attr(data-label);
-        font-weight: 600;
-        color: var(--text-secondary);
-        margin-right: 1rem;
-        text-transform: uppercase;
-        font-size: 0.75rem;
-      }
-
-      .ranking-cell {
-        flex-direction: row;
-        justify-content: flex-end;
-        gap: 1rem;
-      }
-
-      .country-ranking {
-        font-size: 0.75rem;
-      }
-
-      .university-name {
-        justify-content: flex-end;
-      }
-    }
-
-    /* Animation for status pills */
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    .pill.pending {
-      animation: pulse 2s infinite;
-    }
-  </style>
-</head>
-</head>
-<tbody>
-  <!-- Singapore -->
-  <tr data-country="sg" data-ranking="8" data-status="pending" data-applied="">
-    <td data-label="#">1</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-sg"></span>
-        National University of Singapore
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #8</span>
-      <span class="country-ranking">SG #1</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <!-- UK -->
-  <tr data-country="uk" data-ranking="9" data-status="pending" data-applied="">
-    <td data-label="#">2</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-gb"></span>
-        University College London (UCL)
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #9</span>
-      <span class="country-ranking">UK #3</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <!-- Hong Kong -->
-  <tr data-country="hk" data-ranking="11" data-status="pending" data-applied="">
-    <td data-label="#">3</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-hk"></span>
-        University of Hong Kong
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #11</span>
-      <span class="country-ranking">HK #1</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <!-- Canada -->
-  <tr data-country="ca" data-ranking="29" data-status="pending" data-applied="">
-    <td data-label="#">4</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-ca"></span>
-        University of Toronto
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #29</span>
-      <span class="country-ranking">Canada #1</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <!-- UK -->
-  <tr data-country="uk" data-ranking="33" data-status="pending" data-applied="">
-    <td data-label="#">5</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-gb"></span>
-        University of Edinburgh
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #33</span>
-      <span class="country-ranking">UK #4</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <tr data-country="uk" data-ranking="35" data-status="pending" data-applied="">
-    <td data-label="#">6</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-gb"></span>
-        University of Manchester
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #35</span>
-      <span class="country-ranking">UK #6</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <!-- USA -->
-  <tr data-country="us" data-ranking="69" data-status="pending" data-applied="">
-    <td data-label="#">7</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-us"></span>
-        Brown University
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #69</span>
-      <span class="country-ranking">USA #25</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <tr data-country="us" data-ranking="70" data-status="pending" data-applied="">
-    <td data-label="#">8</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-us"></span>
-        University of Illinois Urbana-Champaign
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #70</span>
-      <span class="country-ranking">USA #5</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <tr data-country="us" data-ranking="81" data-status="pending" data-applied="">
-    <td data-label="#">9</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-us"></span>
-        University of Washington
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #81</span>
-      <span class="country-ranking">USA #6</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <tr data-country="us" data-ranking="82" data-status="applied" data-applied="2025-08-12">
-    <td data-label="#">10</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-us"></span>
-        Pennsylvania State University
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #82</span>
-      <span class="country-ranking">USA #24</span>
-    </td>
-    <td data-label="Status"><span class="pill applied">Applied</span></td>
-    <td data-label="Applied">12 Aug 2025</td>
-    <td data-label="Decision">Pending</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <tr data-country="uk" data-ranking="87" data-status="pending" data-applied="">
-    <td data-label="#">11</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-gb"></span>
-        University of Southampton
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #87</span>
-      <span class="country-ranking">UK #10</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <tr data-country="us" data-ranking="88" data-status="pending" data-applied="">
-    <td data-label="#">12</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-us"></span>
-        Purdue University
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #88</span>
-      <span class="country-ranking">Country #17</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <tr data-country="us" data-ranking="110" data-status="pending" data-applied="">
-    <td data-label="#">13</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-us"></span>
-        University of Wisconsin–Madison
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #110</span>
-      <span class="country-ranking">Country #18</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <tr data-country="ie" data-ranking="118" data-status="pending" data-applied="">
-    <td data-label="#">14</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-ie"></span>
-        University College Dublin
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #118</span>
-      <span class="country-ranking">Country #2</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <tr data-country="us" data-ranking="123" data-status="pending" data-applied="">
-    <td data-label="#">15</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-us"></span>
-        Georgia Institute of Technology
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #123</span>
-      <span class="country-ranking">Country #9</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <tr data-country="us" data-ranking="146" data-status="pending" data-applied="">
-    <td data-label="#">16</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-us"></span>
-        University of Southern California
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #146</span>
-      <span class="country-ranking">Country #23</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <tr data-country="us" data-ranking="173" data-status="accepted" data-applied="2025-07-01">
-    <td data-label="#">17</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-us"></span>
-        Arizona State University
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #173</span>
-      <span class="country-ranking">Country #36</span>
-    </td>
-    <td data-label="Status"><span class="pill accepted">Accepted</span></td>
-    <td data-label="Applied">01 Jul 2025</td>
-    <td data-label="Decision">29 Aug 2025</td>
-    <td data-label="Documents"><a href="ASU.pdf" target="_blank">Offer Letter</a></td>
-  </tr>
-
-  <!-- NEW ENTRY: University of Maryland -->
-  <tr data-country="us" data-ranking="207" data-status="pending" data-applied="">
-    <td data-label="#">18</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-us"></span>
-        University of Maryland
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #207</span>
-      <span class="country-ranking">USA #14</span>
-    </td>
-    <td data-label="Status"><span class="pill pending">Pending</span></td>
-    <td data-label="Applied">—</td>
-    <td data-label="Decision">—</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <tr data-country="us" data-ranking="448" data-status="accepted" data-applied="2025-07-01">
-    <td data-label="#">19</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-us"></span>
-        Iowa State University
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #448</span>
-      <span class="country-ranking">Country #52 </span>
-    </td>
-    <td data-label="Status"><span class="pill accepted">Accepted</span></td>
-    <td data-label="Applied">01 Jul 2025</td>
-    <td data-label="Decision">04 Jul 2025</td>
-    <td data-label="Documents"><a href="Iowa.pdf" target="_blank">Offer Letter</a></td>
-  </tr>
-
-  <tr data-country="us" data-ranking="597" data-status="applied" data-applied="2025-08-22">
-    <td data-label="#">20</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-us"></span>
-        University of Texas, Dallas
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #597</span>
-      <span class="country-ranking">Country #54</span>
-    </td>
-    <td data-label="Status"><span class="pill applied">Applied</span></td>
-    <td data-label="Applied">22 Aug 2025</td>
-    <td data-label="Decision">Pending</td>
-    <td data-label="Documents">—</td>
-  </tr>
-
-  <tr data-country="us" data-ranking="1000" data-status="accepted" data-applied="2025-06-27">
-    <td data-label="#">21</td>
-    <td data-label="University">
-      <div class="university-name">
-        <span class="flag-icon flag-icon-us"></span>
-        Florida Institute of Technology
-      </div>
-    </td>
-    <td data-label="Ranking" class="ranking-cell">
-      <span class="world-ranking">QS #1000+</span>
-      <span class="country-ranking">Country #177</span>
-    </td>
-    <td data-label="Status">
-      <span class="pill accepted">Accepted</span><br>
-      <span class="scholarship-list">Scholarships:<br>$17,500/year</span>
-    </td>
-    <td data-label="Applied">27 Jun 2025</td>
-    <td data-label="Decision">02 Jul 2025</td>
-    <td data-label="Documents">
-      <a href="Florida Tech.pdf" target="_blank">Offer Letter</a><br>
-      <a href="Florida Tech Scholarship.pdf" target="_blank">Scholarship Letter</a>
-    </td>
-  </tr>
-</tbody>
-
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Filter functionality
-      const filterButton = document.getElementById('filterButton');
-      const dropdownContent = document.getElementById('dropdownContent');
-      
-      filterButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        dropdownContent.classList.toggle('show');
-      });
-      
-      // Close dropdown when clicking outside
-      document.addEventListener('click', function() {
-        dropdownContent.classList.remove('show');
-      });
-      
-      // Filter table rows
-      document.querySelectorAll('.dropdown-content a').forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const country = this.getAttribute('data-filter');
-          filterTable(country);
-          dropdownContent.classList.remove('show');
-        });
-      });
-      
-      // Sort functionality
-      document.querySelectorAll('th.sortable').forEach(header => {
-        header.addEventListener('click', function() {
-          const sortBy = this.getAttribute('data-sort');
-          const isAsc = this.classList.contains('asc');
-          
-          // Reset all sort indicators
-          document.querySelectorAll('th.sortable').forEach(h => {
-            h.classList.remove('asc', 'desc');
-          });
-          
-          // Set new sort direction
-          this.classList.toggle('asc', !isAsc);
-          this.classList.toggle('desc', isAsc);
-          
-          sortTable(sortBy, !isAsc);
-        });
-      });
-    });
-    
-    function filterTable(country) {
-      const rows = document.querySelectorAll('#applicationsTable tbody tr');
-      
-      rows.forEach(row => {
-        if (country === 'all') {
-          row.style.display = '';
-        } else {
-          if (row.getAttribute('data-country') === country) {
-            row.style.display = '';
-          } else {
-            row.style.display = 'none';
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naghul Adhithya - University Admissions Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-      });
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .subtag {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 20px;
+        }
+        
+        .portfolio-link {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .summary {
+            display: flex;
+            justify-content: center;
+            padding: 25px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eaecef;
+        }
+        
+        .card {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 0 15px;
+            min-width: 120px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+        
+        .applied {
+            background: #e8f4fd;
+            color: #0a58ca;
+        }
+        
+        .accepted {
+            background: #e8f5e9;
+            color: #0a5e2d;
+        }
+        
+        .rejected {
+            background: #fde8e8;
+            color: #ca0a0a;
+        }
+        
+        .value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .table-section {
+            padding: 30px;
+        }
+        
+        .filters {
+            margin-bottom: 20px;
+        }
+        
+        .filter-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .filter-button {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-button:hover {
+            background: #3a516e;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.2s ease;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .filter-dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .flag-icon {
+            margin-right: 8px;
+            border-radius: 2px;
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+        }
+        
+        h2 {
+            margin: 25px 0 20px;
+            color: #2c3e50;
+            font-size: 1.8rem;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        th, td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eaecef;
+        }
+        
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+            position: sticky;
+            top: 0;
+        }
+        
+        th.sortable {
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        th.sortable:hover {
+            background: #e9ecef;
+        }
+        
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .university-name {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .ranking-cell {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .world-ranking {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .country-ranking {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        
+        .pill {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .pill.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .pill.applied {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
+        .pill.accepted {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .scholarship-list {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            color: #0a5e2d;
+        }
+        
+        a {
+            color: #0a58ca;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        a:hover {
+            color: #0b3e91;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .summary {
+                flex-wrap: wrap;
+            }
+            
+            .card {
+                margin: 10px;
+                flex: 1;
+                min-width: 100px;
+            }
+            
+            th, td {
+                padding: 12px 15px;
+            }
+            
+            .table-section {
+                padding: 20px 15px;
+            }
+            
+            header {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>Naghul Adhithya</h1>
+            <p class="tagline">University Admissions Dashboard</p>
+            <p class="subtag">Fall 2026 Applications • Status Tracking • Documents & Scholarships</p>
+            <a href="https://naghuladhithya.github.io/" class="portfolio-link" target="_blank">View My Portfolio</a>
+        </header>
+        
+        <section class="summary">
+            <div class="card applied">
+                <p class="value">8</p>
+                <p class="label">Applied</p>
+            </div>
+            <div class="card accepted">
+                <p class="value">3</p>
+                <p class="label">Accepted</p>
+            </div>
+            <div class="card rejected">
+                <p class="value">0</p>
+                <p class="label">Rejected</p>
+            </div>
+        </section>
+        
+        <section class="table-section">
+            <div class="filters">
+                <div class="filter-dropdown">
+                    <button class="filter-button" id="filterButton">
+                        <span>LOCKED IN</span>
+                    </button>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <a href="#" data-filter="all">All Countries</a>
+                        <a href="#" data-filter="us"><span class="flag-icon flag-icon-us"></span> United States</a>
+                        <a href="#" data-filter="uk"><span class="flag-icon flag-icon-gb"></span> United Kingdom</a>
+                        <a href="#" data-filter="ca"><span class="flag-icon flag-icon-ca"></span> Canada</a>
+                        <a href="#" data-filter="sg"><span class="flag-icon flag-icon-sg"></span> Singapore</a>
+                        <a href="#" data-filter="hk"><span class="flag-icon flag-icon-hk"></span> Hong Kong</a>
+                        <a href="#" data-filter="ie"><span class="flag-icon flag-icon-ie"></span> Ireland</a>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Application Status</h2>
+            
+            <div class="table-container">
+                <table id="applicationsTable">
+                    <thead>
+                        <tr>
+                            <th>S.NO</th>
+                            <th>University</th>
+                            <th class="sortable" data-sort="ranking">Ranking</th>
+                            <th class="sortable" data-sort="status">Status</th>
+                            <th class="sortable" data-sort="applied">Applied</th>
+                            <th>Decision</th>
+                            <th>Documents</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Singapore -->
+                        <tr data-country="sg" data-ranking="8" data-status="pending" data-applied="">
+                            <td data-label="#">1</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-sg"></span> National University of Singapore
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #8</span>
+                                <span class="country-ranking">SG #1</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <!-- Hong Kong -->
+                        <tr data-country="hk" data-ranking="11" data-status="pending" data-applied="">
+                            <td data-label="#">2</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-hk"></span> University of Hong Kong
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #11</span>
+                                <span class="country-ranking">HK #1</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <!-- UK -->
+                        <tr data-country="uk" data-ranking="9" data-status="pending" data-applied="">
+                            <td data-label="#">3</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-gb"></span> University College London (UCL)
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #9</span>
+                                <span class="country-ranking">UK #3</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <!-- Canada -->
+                        <tr data-country="ca" data-ranking="29" data-status="pending" data-applied="">
+                            <td data-label="#">4</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-ca"></span> University of Toronto
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #29</span>
+                                <span class="country-ranking">CA #1</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="uk" data-ranking="33" data-status="pending" data-applied="">
+                            <td data-label="#">5</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-gb"></span> University of Edinburgh
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #33</span>
+                                <span class="country-ranking">UK #4</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="uk" data-ranking="35" data-status="pending" data-applied="">
+                            <td data-label="#">6</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-gb"></span> University of Manchester
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #35</span>
+                                <span class="country-ranking">UK #6</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="uk" data-ranking="86" data-status="pending" data-applied="">
+                            <td data-label="#">7</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-gb"></span> University of Southampton
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #87</span>
+                                <span class="country-ranking">UK #10</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <!-- USA -->
+                        <tr data-country="us" data-ranking="69" data-status="pending" data-applied="">
+                            <td data-label="#">8</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-us"></span> Brown University
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #69</span>
+                                <span class="country-ranking">USA #25</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="us" data-ranking="70" data-status="pending" data-applied="">
+                            <td data-label="#">9</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-us"></span> University of Illinois Urbana-Champaign
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #70</span>
+                                <span class="country-ranking">USA #5</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="us" data-ranking="81" data-status="pending" data-applied="">
+                            <td data-label="#">10</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-us"></span> University of Washington
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #81</span>
+                                <span class="country-ranking">USA #6</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="us" data-ranking="82" data-status="applied" data-applied="2025-08-12">
+                            <td data-label="#">11</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-us"></span> Pennsylvania State University
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #82</span>
+                                <span class="country-ranking">USA #24</span>
+                            </td>
+                            <td data-label="Status"><span class="pill applied">Applied</span></td>
+                            <td data-label="Applied">12 Aug 2025</td>
+                            <td data-label="Decision">Pending</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="us" data-ranking="88" data-status="pending" data-applied="">
+                            <td data-label="#">12</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-us"></span> Purdue University
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #88</span>
+                                <span class="country-ranking">USA #17</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="us" data-ranking="110" data-status="pending" data-applied="">
+                            <td data-label="#">13</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-us"></span> University of Wisconsin–Madison
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #110</span>
+                                <span class="country-ranking">USA #18</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="us" data-ranking="123" data-status="pending" data-applied="">
+                            <td data-label="#">14</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-us"></span> Georgia Institute of Technology
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #123</span>
+                                <span class="country-ranking">USA #9</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="us" data-ranking="146" data-status="pending" data-applied="">
+                            <td data-label="#">15</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-us"></span> University of Southern California
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #146</span>
+                                <span class="country-ranking">USA #23</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="us" data-ranking="173" data-status="accepted" data-applied="2025-07-01">
+                            <td data-label="#">16</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-us"></span> Arizona State University
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #173</span>
+                                <span class="country-ranking">USA #36</span>
+                            </td>
+                            <td data-label="Status"><span class="pill accepted">Accepted</span></td>
+                            <td data-label="Applied">01 Jul 2025</td>
+                            <td data-label="Decision">29 Aug 2025</td>
+                            <td data-label="Documents"><a href="ASU.pdf" target="_blank">Offer Letter</a></td>
+                        </tr>
+                        
+                        <tr data-country="uk" data-ranking="149" data-status="pending" data-applied="">
+                            <td data-label="#">17</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-gb"></span> University of Liverpool
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #149</span>
+                                <span class="country-ranking">UK #15</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="us" data-ranking="207" data-status="pending" data-applied="">
+                            <td data-label="#">18</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-us"></span> University of Maryland
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #207</span>
+                                <span class="country-ranking">USA #14</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="us" data-ranking="448" data-status="accepted" data-applied="2025-07-01">
+                            <td data-label="#">19</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-us"></span> Iowa State University
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #448</span>
+                                <span class="country-ranking">USA #52</span>
+                            </td>
+                            <td data-label="Status"><span class="pill accepted">Accepted</span></td>
+                            <td data-label="Applied">01 Jul 2025</td>
+                            <td data-label="Decision">04 Jul 2025</td>
+                            <td data-label="Documents"><a href="Iowa.pdf" target="_blank">Offer Letter</a></td>
+                        </tr>
+                        
+                        <tr data-country="us" data-ranking="597" data-status="applied" data-applied="2025-08-22">
+                            <td data-label="#">20</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-us"></span> University of Texas, Dallas
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #597</span>
+                                <span class="country-ranking">USA #54</span>
+                            </td>
+                            <td data-label="Status"><span class="pill applied">Applied</span></td>
+                            <td data-label="Applied">22 Aug 2025</td>
+                            <td data-label="Decision">Pending</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="us" data-ranking="1000" data-status="accepted" data-applied="2025-06-27">
+                            <td data-label="#">21</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-us"></span> Florida Institute of Technology
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #1000+</span>
+                                <span class="country-ranking">USA #177</span>
+                            </td>
+                            <td data-label="Status">
+                                <span class="pill accepted">Accepted</span><br>
+                                <span class="scholarship-list">Scholarships:<br>$17,500/year</span>
+                            </td>
+                            <td data-label="Applied">27 Jun 2025</td>
+                            <td data-label="Decision">02 Jul 2025</td>
+                            <td data-label="Documents">
+                                <a href="Florida Tech.pdf" target="_blank">Offer Letter</a><br>
+                                <a href="Florida Tech Scholarship.pdf" target="_blank">Scholarship Letter</a>
+                            </td>
+                        </tr>
+                        
+                        <!-- Ireland -->
+                        <tr data-country="ie" data-ranking="118" data-status="pending" data-applied="">
+                            <td data-label="#">22</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-ie"></span> University College Dublin
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #118</span>
+                                <span class="country-ranking">IE #2</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter functionality
+            const filterLinks = document.querySelectorAll('.dropdown-content a');
+            const tableRows = document.querySelectorAll('#applicationsTable tbody tr');
+            
+            filterLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const filter = this.getAttribute('data-filter');
+                    
+                    tableRows.forEach(row => {
+                        if (filter === 'all') {
+                            row.style.display = '';
+                        } else {
+                            if (row.getAttribute('data-country') === filter) {
+                                row.style.display = '';
+                            } else {
+                                row.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // Sorting functionality
+            const sortableHeaders = document.querySelectorAll('th.sortable');
+            
+            sortableHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const sortBy = this.getAttribute('data-sort');
+                    const tbody = this.closest('table').querySelector('tbody');
+                    const rows = Array.from(tbody.querySelectorAll('tr'));
+                    
+                    // Determine sort direction
+                    const currentDir = this.getAttribute('data-sort-dir') || 'asc';
+                    const newDir = currentDir === 'asc' ? 'desc' : 'asc';
+                    this.setAttribute('data-sort-dir', newDir);
+                    
+                    // Sort rows
+                    rows.sort((a, b) => {
+                        let aValue = a.getAttribute(`data-${sortBy}`);
+                        let bValue = b.getAttribute(`data-${sortBy}`);
+                        
+                        // Handle different data types
+                        if (sortBy === 'ranking' || sortBy === 'applied') {
+                            aValue = aValue || (sortBy === 'applied' ? '9999-12-31' : '9999');
+                            bValue = bValue || (sortBy === 'applied' ? '9999-12-31' : '9999');
+                            
+                            if (sortBy === 'applied') {
+                                // Date comparison
+                                return newDir === 'asc' ? 
+                                    new Date(aValue) - new Date(bValue) : 
+                                    new Date(bValue) - new Date(aValue);
+                            } else {
+                                // Numeric comparison
+                                return newDir === 'asc' ? 
+                                    parseInt(aValue) - parseInt(bValue) : 
+                                    parseInt(bValue) - parseInt(aValue);
+                            }
+                        } else {
+                            // String comparison
+                            aValue = aValue || '';
+                            bValue = bValue || '';
+                            
+                            return newDir === 'asc' ? 
+                                aValue.localeCompare(bValue) : 
+                                bValue.localeCompare(aValue);
+                        }
+                    });
+                    
+                    // Remove existing rows
+                    while (tbody.firstChild) {
+                        tbody.removeChild(tbody.firstChild);
+                    }
+                    
+                    // Add sorted rows
+                    rows.forEach(row => {
+                        tbody.appendChild(row);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
