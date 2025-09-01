@@ -636,441 +636,399 @@ header::before {
   </style>
 </head>
 </head>
-<body>
-  <div class="dashboard">
-    <header>
-      <h1>Naghul Adhithya</h1>
-      <p class="tagline">University Admissions Dashboard</p>
-      <p class="subtag">Fall 2026 Applications • Status Tracking • Documents & Scholarships</p>
-      <a href="https://naghuladhithya.github.io/" class="portfolio-link" target="_blank">View My Portfolio</a>
-    </header>
-
-    <section class="summary">
-      <div class="card applied">
-        <p class="value">5</p>
-        <p class="label">Applied</p>
+<tbody>
+  <!-- Singapore -->
+  <tr data-country="sg" data-ranking="8" data-status="pending" data-applied="">
+    <td data-label="#">1</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-sg"></span>
+        National University of Singapore
       </div>
-      <div class="card accepted">
-        <p class="value">3</p>
-        <p class="label">Accepted</p>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #8</span>
+      <span class="country-ranking">SG #1</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <!-- UK -->
+  <tr data-country="uk" data-ranking="9" data-status="pending" data-applied="">
+    <td data-label="#">2</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-gb"></span>
+        University College London (UCL)
       </div>
-      <div class="card rejected">
-        <p class="value">0</p>
-        <p class="label">Rejected</p>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #9</span>
+      <span class="country-ranking">UK #3</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <!-- Hong Kong -->
+  <tr data-country="hk" data-ranking="11" data-status="pending" data-applied="">
+    <td data-label="#">3</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-hk"></span>
+        University of Hong Kong
       </div>
-    </section>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #11</span>
+      <span class="country-ranking">HK #1</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
 
-    <section class="table-section">
-      <div class="filters">
-        <div class="filter-dropdown">
-          <button class="filter-button" id="filterButton">
-            <span>LOCKED IN</span>
-          </button>
-          <div class="dropdown-content" id="dropdownContent">
-            <a href="#" data-filter="all">All Countries</a>
-            <a href="#" data-filter="us"><span class="flag-icon flag-icon-us"></span> United States</a>
-            <a href="#" data-filter="uk"><span class="flag-icon flag-icon-gb"></span> United Kingdom</a>
-            <a href="#" data-filter="sg"><span class="flag-icon flag-icon-sg"></span> Singapore</a>
-            <a href="#" data-filter="hk"><span class="flag-icon flag-icon-hk"></span> Hong Kong</a>
-            <a href="#" data-filter="ie"><span class="flag-icon flag-icon-ie"></span> Ireland</a>
-          </div>
-        </div>
+  <!-- Canada -->
+  <tr data-country="ca" data-ranking="29" data-status="pending" data-applied="">
+    <td data-label="#">4</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-ca"></span>
+        University of Toronto
       </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #29</span>
+      <span class="country-ranking">Canada #1</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
 
-      <h2>Application Status</h2>
-      <div class="table-container">
-        <table id="applicationsTable">
-          <thead>
-            <tr>
-              <th>S.NO</th>
-              <th>University</th>
-              <th class="sortable" data-sort="ranking">Ranking</th>
-              <th class="sortable" data-sort="status">Status</th>
-              <th class="sortable" data-sort="applied">Applied</th>
-              <th>Decision</th>
-              <th>Documents</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Singapore -->
-            <tr data-country="sg" data-ranking="8" data-status="pending" data-applied="">
-              <td data-label="#">1</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-sg"></span>
-                  National University of Singapore
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #8</span>
-                <span class="country-ranking">SG #1</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-            <!-- Hong Kong -->
-            <tr data-country="hk" data-ranking="11" data-status="pending" data-applied="">
-              <td data-label="#">2</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-hk"></span>
-                  University of Hong Kong
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #11</span>
-                <span class="country-ranking">HK #1</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-            <!-- UK -->
-            <tr data-country="uk" data-ranking="9" data-status="pending" data-applied="">
-              <td data-label="#">3</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-gb"></span>
-                  University College London (UCL)
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #9</span>
-                <span class="country-ranking">UK #3</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-            <tr data-country="uk" data-ranking="33" data-status="pending" data-applied="">
-              <td data-label="#">4</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-gb"></span>
-                  University of Edinburgh
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #33</span>
-                <span class="country-ranking">UK #4</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-            <tr data-country="uk" data-ranking="35" data-status="pending" data-applied="">
-              <td data-label="#">5</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-gb"></span>
-                  University of Manchester
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #35</span>
-                <span class="country-ranking">UK #6</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-            <tr data-country="uk" data-ranking="86" data-status="pending" data-applied="">
-              <td data-label="#">6</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-gb"></span>
-                  University of Southampton
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #87</span>
-                <span class="country-ranking">UK #10</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-            <tr data-country="uk" data-ranking="149" data-status="pending" data-applied="">
-              <td data-label="#">7</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-gb"></span>
-                  University of Liverpool
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #149</span>
-                <span class="country-ranking">UK #15</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-            <!-- USA -->
-            <tr data-country="us" data-ranking="69" data-status="pending" data-applied="">
-              <td data-label="#">8</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-us"></span>
-                  Brown University
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #69</span>
-                <span class="country-ranking">USA #25</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-
-
-
-
-            <tr data-country="us" data-ranking="70" data-status="pending" data-applied="">
-              <td data-label="#">9</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-us"></span>
-                  University of Illinois Urbana-Champaign
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #70</span>
-                <span class="country-ranking">USA #5</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
- <tr data-country="us" data-ranking="81" data-status="pending" data-applied="">
-              <td data-label="#">10</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-us"></span>
-                  University of Washington
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #81</span>
-                <span class="country-ranking">USA #6</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-            <tr data-country="us" data-ranking="82" data-status="applied" data-applied="2025-08-12">
-              <td data-label="#">11</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-us"></span>
-                  Pennsylvania State University
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #82</span>
-                <span class="country-ranking">USA #24</span>
-              </td>
-              <td data-label="Status"><span class="pill applied">Applied</span></td>
-              <td data-label="Applied">12 Aug 2025</td>
-              <td data-label="Decision">Pending</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-            <tr data-country="us" data-ranking="88" data-status="pending" data-applied="">
-              <td data-label="#">12</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-us"></span>
-                  Purdue University
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #88</span>
-                <span class="country-ranking">Country #17</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-            <tr data-country="us" data-ranking="110" data-status="pending" data-applied="">
-              <td data-label="#">13</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-us"></span>
-                  University of Wisconsin–Madison
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #110</span>
-                <span class="country-ranking">Country #18</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-            <tr data-country="us" data-ranking="123" data-status="pending" data-applied="">
-              <td data-label="#">14</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-us"></span>
-                  Georgia Institute of Technology
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #123</span>
-                <span class="country-ranking">Country #9</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-            <tr data-country="us" data-ranking="146" data-status="pending" data-applied="">
-              <td data-label="#">15</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-us"></span>
-                  University of Southern California
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #146</span>
-                <span class="country-ranking">Country #23</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-            <tr data-country="us" data-ranking="173" data-status="accepted" data-applied="2025-07-01">
-              <td data-label="#">16</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-us"></span>
-                  Arizona State University
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #173</span>
-                <span class="country-ranking">Country #36</span>
-              </td>
-              <td data-label="Status"><span class="pill accepted">Accepted</span></td>
-              <td data-label="Applied">01 Jul 2025</td>
-              <td data-label="Decision">29 Aug 2025</td>
-              <td data-label="Documents"><a href="ASU.pdf" target="_blank">Offer Letter</a></td>
-            </tr>
-
-            <tr data-country="us" data-ranking="448" data-status="accepted" data-applied="2025-07-01">
-              <td data-label="#">17</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-us"></span>
-                  Iowa State University
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #448</span>
-                <span class="country-ranking">Country #52 </span>
-              </td>
-              <td data-label="Status"><span class="pill accepted">Accepted</span></td>
-              <td data-label="Applied">01 Jul 2025</td>
-              <td data-label="Decision">04 Jul 2025</td>
-              <td data-label="Documents"><a href="Iowa.pdf" target="_blank">Offer Letter</a></td>
-            </tr>
-
-            <tr data-country="us" data-ranking="597" data-status="applied" data-applied="2025-08-22">
-              <td data-label="#">18</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-us"></span>
-                  University of Texas, Dallas
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #597</span>
-                <span class="country-ranking">Country #54</span>
-              </td>
-              <td data-label="Status"><span class="pill applied">Applied</span></td>
-              <td data-label="Applied">22 Aug 2025</td>
-              <td data-label="Decision">Pending</td>
-              <td data-label="Documents">—</td>
-            </tr>
-
-            <tr data-country="us" data-ranking="1000" data-status="accepted" data-applied="2025-06-27">
-              <td data-label="#">20</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-us"></span>
-                  Florida Institute of Technology
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #1000+</span>
-                <span class="country-ranking">Country #177</span>
-              </td>
-              <td data-label="Status">
-                <span class="pill accepted">Accepted</span><br>
-                <span class="scholarship-list">Scholarships:<br>$17,500/year</span>
-              </td>
-              <td data-label="Applied">27 Jun 2025</td>
-              <td data-label="Decision">02 Jul 2025</td>
-              <td data-label="Documents">
-                <a href="Florida Tech.pdf" target="_blank">Offer Letter</a><br>
-                <a href="Florida Tech Scholarship.pdf" target="_blank">Scholarship Letter</a>
-              </td>
-            </tr>
-
-            
-            <!-- Ireland -->
-            <tr data-country="ie" data-ranking="118" data-status="pending" data-applied="">
-              <td data-label="#">21</td>
-              <td data-label="University">
-                <div class="university-name">
-                  <span class="flag-icon flag-icon-ie"></span>
-                  University College Dublin
-                </div>
-              </td>
-              <td data-label="Ranking" class="ranking-cell">
-                <span class="world-ranking">QS #118</span>
-                <span class="country-ranking">Country #2</span>
-              </td>
-              <td data-label="Status"><span class="pill pending">Pending</span></td>
-              <td data-label="Applied">—</td>
-              <td data-label="Decision">—</td>
-              <td data-label="Documents">—</td>
-            </tr>
-          </tbody>
-        </table>
+  <!-- UK -->
+  <tr data-country="uk" data-ranking="33" data-status="pending" data-applied="">
+    <td data-label="#">5</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-gb"></span>
+        University of Edinburgh
       </div>
-    </section>
-  </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #33</span>
+      <span class="country-ranking">UK #4</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <tr data-country="uk" data-ranking="35" data-status="pending" data-applied="">
+    <td data-label="#">6</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-gb"></span>
+        University of Manchester
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #35</span>
+      <span class="country-ranking">UK #6</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <!-- USA -->
+  <tr data-country="us" data-ranking="69" data-status="pending" data-applied="">
+    <td data-label="#">7</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-us"></span>
+        Brown University
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #69</span>
+      <span class="country-ranking">USA #25</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <tr data-country="us" data-ranking="70" data-status="pending" data-applied="">
+    <td data-label="#">8</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-us"></span>
+        University of Illinois Urbana-Champaign
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #70</span>
+      <span class="country-ranking">USA #5</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <tr data-country="us" data-ranking="81" data-status="pending" data-applied="">
+    <td data-label="#">9</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-us"></span>
+        University of Washington
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #81</span>
+      <span class="country-ranking">USA #6</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <tr data-country="us" data-ranking="82" data-status="applied" data-applied="2025-08-12">
+    <td data-label="#">10</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-us"></span>
+        Pennsylvania State University
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #82</span>
+      <span class="country-ranking">USA #24</span>
+    </td>
+    <td data-label="Status"><span class="pill applied">Applied</span></td>
+    <td data-label="Applied">12 Aug 2025</td>
+    <td data-label="Decision">Pending</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <tr data-country="uk" data-ranking="87" data-status="pending" data-applied="">
+    <td data-label="#">11</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-gb"></span>
+        University of Southampton
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #87</span>
+      <span class="country-ranking">UK #10</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <tr data-country="us" data-ranking="88" data-status="pending" data-applied="">
+    <td data-label="#">12</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-us"></span>
+        Purdue University
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #88</span>
+      <span class="country-ranking">Country #17</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <tr data-country="us" data-ranking="110" data-status="pending" data-applied="">
+    <td data-label="#">13</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-us"></span>
+        University of Wisconsin–Madison
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #110</span>
+      <span class="country-ranking">Country #18</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <tr data-country="ie" data-ranking="118" data-status="pending" data-applied="">
+    <td data-label="#">14</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-ie"></span>
+        University College Dublin
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #118</span>
+      <span class="country-ranking">Country #2</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <tr data-country="us" data-ranking="123" data-status="pending" data-applied="">
+    <td data-label="#">15</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-us"></span>
+        Georgia Institute of Technology
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #123</span>
+      <span class="country-ranking">Country #9</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <tr data-country="us" data-ranking="146" data-status="pending" data-applied="">
+    <td data-label="#">16</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-us"></span>
+        University of Southern California
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #146</span>
+      <span class="country-ranking">Country #23</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <tr data-country="us" data-ranking="173" data-status="accepted" data-applied="2025-07-01">
+    <td data-label="#">17</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-us"></span>
+        Arizona State University
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #173</span>
+      <span class="country-ranking">Country #36</span>
+    </td>
+    <td data-label="Status"><span class="pill accepted">Accepted</span></td>
+    <td data-label="Applied">01 Jul 2025</td>
+    <td data-label="Decision">29 Aug 2025</td>
+    <td data-label="Documents"><a href="ASU.pdf" target="_blank">Offer Letter</a></td>
+  </tr>
+
+  <!-- NEW ENTRY: University of Maryland -->
+  <tr data-country="us" data-ranking="207" data-status="pending" data-applied="">
+    <td data-label="#">18</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-us"></span>
+        University of Maryland
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #207</span>
+      <span class="country-ranking">USA #14</span>
+    </td>
+    <td data-label="Status"><span class="pill pending">Pending</span></td>
+    <td data-label="Applied">—</td>
+    <td data-label="Decision">—</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <tr data-country="us" data-ranking="448" data-status="accepted" data-applied="2025-07-01">
+    <td data-label="#">19</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-us"></span>
+        Iowa State University
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #448</span>
+      <span class="country-ranking">Country #52 </span>
+    </td>
+    <td data-label="Status"><span class="pill accepted">Accepted</span></td>
+    <td data-label="Applied">01 Jul 2025</td>
+    <td data-label="Decision">04 Jul 2025</td>
+    <td data-label="Documents"><a href="Iowa.pdf" target="_blank">Offer Letter</a></td>
+  </tr>
+
+  <tr data-country="us" data-ranking="597" data-status="applied" data-applied="2025-08-22">
+    <td data-label="#">20</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-us"></span>
+        University of Texas, Dallas
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #597</span>
+      <span class="country-ranking">Country #54</span>
+    </td>
+    <td data-label="Status"><span class="pill applied">Applied</span></td>
+    <td data-label="Applied">22 Aug 2025</td>
+    <td data-label="Decision">Pending</td>
+    <td data-label="Documents">—</td>
+  </tr>
+
+  <tr data-country="us" data-ranking="1000" data-status="accepted" data-applied="2025-06-27">
+    <td data-label="#">21</td>
+    <td data-label="University">
+      <div class="university-name">
+        <span class="flag-icon flag-icon-us"></span>
+        Florida Institute of Technology
+      </div>
+    </td>
+    <td data-label="Ranking" class="ranking-cell">
+      <span class="world-ranking">QS #1000+</span>
+      <span class="country-ranking">Country #177</span>
+    </td>
+    <td data-label="Status">
+      <span class="pill accepted">Accepted</span><br>
+      <span class="scholarship-list">Scholarships:<br>$17,500/year</span>
+    </td>
+    <td data-label="Applied">27 Jun 2025</td>
+    <td data-label="Decision">02 Jul 2025</td>
+    <td data-label="Documents">
+      <a href="Florida Tech.pdf" target="_blank">Offer Letter</a><br>
+      <a href="Florida Tech Scholarship.pdf" target="_blank">Scholarship Letter</a>
+    </td>
+  </tr>
+</tbody>
+
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
