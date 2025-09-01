@@ -5,7 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Naghul Adhithya - University Admissions Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #9b59b6;
+            --light: #f8f9fa;
+            --dark: #1a2530;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --pending: #95a5a6;
+            --applied: #3498db;
+            --accepted: #2ecc71;
+            --rejected: #e74c3c;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -14,102 +32,142 @@
         }
         
         body {
-            background-color: #f5f7fa;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
             color: #333;
             line-height: 1.6;
             padding: 20px;
+            min-height: 100vh;
         }
         
         .dashboard {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
         
         header {
-            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            background: linear-gradient(120deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 30px;
+            padding: 35px 30px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, transparent 10%, rgba(0,0,0,0.1) 50%);
+            transform: rotate(30deg);
         }
         
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            position: relative;
         }
         
         .tagline {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             opacity: 0.9;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            position: relative;
         }
         
         .subtag {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-bottom: 20px;
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 25px;
+            position: relative;
         }
         
         .portfolio-link {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
         .portfolio-link:hover {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .summary {
             display: flex;
             justify-content: center;
-            padding: 25px 20px;
+            padding: 30px 20px;
             background: #f8f9fa;
             border-bottom: 1px solid #eaecef;
+            gap: 25px;
+            flex-wrap: wrap;
         }
         
         .card {
-            padding: 20px;
-            border-radius: 10px;
+            padding: 25px;
+            border-radius: 12px;
             text-align: center;
-            margin: 0 15px;
-            min-width: 120px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            min-width: 150px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
         }
         
         .applied {
-            background: #e8f4fd;
+            background: linear-gradient(135deg, #e8f4fd 0%, #cce5ff 100%);
             color: #0a58ca;
+            border-left: 4px solid var(--applied);
         }
         
         .accepted {
-            background: #e8f5e9;
+            background: linear-gradient(135deg, #e8f5e9 0%, #d4edda 100%);
             color: #0a5e2d;
+            border-left: 4px solid var(--accepted);
         }
         
         .rejected {
-            background: #fde8e8;
+            background: linear-gradient(135deg, #fde8e8 0%, #f8d7da 100%);
             color: #ca0a0a;
+            border-left: 4px solid var(--rejected);
         }
         
         .value {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
         
         .label {
-            font-size: 0.9rem;
+            font-size: 1rem;
             opacity: 0.9;
+            font-weight: 500;
         }
         
         .table-section {
@@ -117,7 +175,10 @@
         }
         
         .filters {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         
         .filter-dropdown {
@@ -126,43 +187,52 @@
         }
         
         .filter-button {
-            background: #2c3e50;
+            background: var(--primary);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 500;
             display: flex;
             align-items: center;
+            gap: 10px;
             transition: all 0.3s ease;
+            box-shadow: var(--card-shadow);
         }
         
         .filter-button:hover {
             background: #3a516e;
+            transform: translateY(-2px);
         }
         
         .dropdown-content {
             display: none;
             position: absolute;
             background-color: white;
-            min-width: 200px;
+            min-width: 220px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             z-index: 1;
             overflow: hidden;
+            top: 100%;
+            left: 0;
+            margin-top: 10px;
         }
         
         .dropdown-content a {
             color: #333;
-            padding: 12px 16px;
+            padding: 14px 18px;
             text-decoration: none;
-            display: block;
+            display: flex;
+            align-items: center;
             transition: background 0.2s ease;
+            border-left: 3px solid transparent;
         }
         
         .dropdown-content a:hover {
             background-color: #f1f5f9;
+            border-left: 3px solid var(--secondary);
         }
         
         .filter-dropdown:hover .dropdown-content {
@@ -170,31 +240,37 @@
         }
         
         .flag-icon {
-            margin-right: 8px;
+            margin-right: 10px;
             border-radius: 2px;
             box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+            width: 20px;
+            height: 15px;
+            object-fit: cover;
         }
         
         h2 {
-            margin: 25px 0 20px;
-            color: #2c3e50;
+            margin: 30px 0 20px;
+            color: var(--primary);
             font-size: 1.8rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaecef;
         }
         
         .table-container {
             overflow-x: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
         }
         
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             background: white;
         }
         
         th, td {
-            padding: 16px 20px;
+            padding: 18px 20px;
             text-align: left;
             border-bottom: 1px solid #eaecef;
         }
@@ -205,15 +281,24 @@
             color: #495057;
             position: sticky;
             top: 0;
+            white-space: nowrap;
         }
         
         th.sortable {
             cursor: pointer;
             transition: background 0.2s ease;
+            position: relative;
         }
         
         th.sortable:hover {
             background: #e9ecef;
+        }
+        
+        th.sortable::after {
+            content: '↕';
+            margin-left: 8px;
+            font-size: 0.9rem;
+            opacity: 0.5;
         }
         
         tbody tr {
@@ -237,7 +322,7 @@
         
         .world-ranking {
             font-weight: 500;
-            color: #2c3e50;
+            color: var(--primary);
         }
         
         .country-ranking {
@@ -247,10 +332,12 @@
         
         .pill {
             display: inline-block;
-            padding: 6px 12px;
+            padding: 8px 16px;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 500;
+            text-align: center;
+            min-width: 90px;
         }
         
         .pill.pending {
@@ -272,44 +359,105 @@
             font-size: 0.8rem;
             margin-top: 5px;
             color: #0a5e2d;
+            font-weight: 500;
         }
         
         a {
-            color: #0a58ca;
+            color: var(--secondary);
             text-decoration: none;
             transition: color 0.2s ease;
+            font-weight: 500;
         }
         
         a:hover {
-            color: #0b3e91;
+            color: #1a73e8;
             text-decoration: underline;
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .summary {
-                flex-wrap: wrap;
+                gap: 15px;
             }
             
             .card {
-                margin: 10px;
-                flex: 1;
-                min-width: 100px;
+                min-width: 130px;
+                padding: 20px;
+            }
+            
+            .value {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 25px 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .summary {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 15px;
             }
             
             th, td {
-                padding: 12px 15px;
+                padding: 14px 12px;
             }
             
             .table-section {
                 padding: 20px 15px;
             }
             
-            header {
-                padding: 20px 15px;
+            .filter-button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .dropdown-content {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .portfolio-link {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 12px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .pill {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+                min-width: 80px;
             }
         }
     </style>
@@ -325,7 +473,7 @@
         
         <section class="summary">
             <div class="card applied">
-                <p class="value">8</p>
+                <p class="value">6</p>
                 <p class="label">Applied</p>
             </div>
             <div class="card accepted">
@@ -342,10 +490,11 @@
             <div class="filters">
                 <div class="filter-dropdown">
                     <button class="filter-button" id="filterButton">
+                        <i class="fas fa-filter"></i>
                         <span>LOCKED IN</span>
                     </button>
                     <div class="dropdown-content" id="dropdownContent">
-                        <a href="#" data-filter="all">All Countries</a>
+                        <a href="#" data-filter="all"><i class="fas fa-globe"></i> All Countries</a>
                         <a href="#" data-filter="us"><span class="flag-icon flag-icon-us"></span> United States</a>
                         <a href="#" data-filter="uk"><span class="flag-icon flag-icon-gb"></span> United Kingdom</a>
                         <a href="#" data-filter="ca"><span class="flag-icon flag-icon-ca"></span> Canada</a>
@@ -390,27 +539,9 @@
                             <td data-label="Documents">—</td>
                         </tr>
                         
-                        <!-- Hong Kong -->
-                        <tr data-country="hk" data-ranking="11" data-status="pending" data-applied="">
-                            <td data-label="#">2</td>
-                            <td data-label="University">
-                                <div class="university-name">
-                                    <span class="flag-icon flag-icon-hk"></span> University of Hong Kong
-                                </div>
-                            </td>
-                            <td data-label="Ranking" class="ranking-cell">
-                                <span class="world-ranking">QS #11</span>
-                                <span class="country-ranking">HK #1</span>
-                            </td>
-                            <td data-label="Status"><span class="pill pending">Pending</span></td>
-                            <td data-label="Applied">—</td>
-                            <td data-label="Decision">—</td>
-                            <td data-label="Documents">—</td>
-                        </tr>
-                        
                         <!-- UK -->
                         <tr data-country="uk" data-ranking="9" data-status="pending" data-applied="">
-                            <td data-label="#">3</td>
+                            <td data-label="#">2</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-gb"></span> University College London (UCL)
@@ -419,6 +550,24 @@
                             <td data-label="Ranking" class="ranking-cell">
                                 <span class="world-ranking">QS #9</span>
                                 <span class="country-ranking">UK #3</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <!-- Hong Kong -->
+                        <tr data-country="hk" data-ranking="11" data-status="pending" data-applied="">
+                            <td data-label="#">3</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-hk"></span> University of Hong Kong
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #11</span>
+                                <span class="country-ranking">HK #1</span>
                             </td>
                             <td data-label="Status"><span class="pill pending">Pending</span></td>
                             <td data-label="Applied">—</td>
@@ -478,26 +627,9 @@
                             <td data-label="Documents">—</td>
                         </tr>
                         
-                        <tr data-country="uk" data-ranking="86" data-status="pending" data-applied="">
-                            <td data-label="#">7</td>
-                            <td data-label="University">
-                                <div class="university-name">
-                                    <span class="flag-icon flag-icon-gb"></span> University of Southampton
-                                </div>
-                            </td>
-                            <td data-label="Ranking" class="ranking-cell">
-                                <span class="world-ranking">QS #87</span>
-                                <span class="country-ranking">UK #10</span>
-                            </td>
-                            <td data-label="Status"><span class="pill pending">Pending</span></td>
-                            <td data-label="Applied">—</td>
-                            <td data-label="Decision">—</td>
-                            <td data-label="Documents">—</td>
-                        </tr>
-                        
                         <!-- USA -->
                         <tr data-country="us" data-ranking="69" data-status="pending" data-applied="">
-                            <td data-label="#">8</td>
+                            <td data-label="#">7</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-us"></span> Brown University
@@ -514,7 +646,7 @@
                         </tr>
                         
                         <tr data-country="us" data-ranking="70" data-status="pending" data-applied="">
-                            <td data-label="#">9</td>
+                            <td data-label="#">8</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-us"></span> University of Illinois Urbana-Champaign
@@ -530,8 +662,8 @@
                             <td data-label="Documents">—</td>
                         </tr>
                         
-                        <tr data-country="us" data-ranking="81" data-status="pending" data-applied="">
-                            <td data-label="#">10</td>
+                        <tr data-country="us" data-ranking="81" data-status="applied" data-applied="2025-09-01">
+                            <td data-label="#">9</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-us"></span> University of Washington
@@ -541,14 +673,14 @@
                                 <span class="world-ranking">QS #81</span>
                                 <span class="country-ranking">USA #6</span>
                             </td>
-                            <td data-label="Status"><span class="pill pending">Pending</span></td>
-                            <td data-label="Applied">—</td>
-                            <td data-label="Decision">—</td>
+                            <td data-label="Status"><span class="pill applied">Applied</span></td>
+                            <td data-label="Applied">01 Sep 2025</td>
+                            <td data-label="Decision">Pending</td>
                             <td data-label="Documents">—</td>
                         </tr>
                         
                         <tr data-country="us" data-ranking="82" data-status="applied" data-applied="2025-08-12">
-                            <td data-label="#">11</td>
+                            <td data-label="#">10</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-us"></span> Pennsylvania State University
@@ -565,7 +697,7 @@
                         </tr>
                         
                         <tr data-country="us" data-ranking="88" data-status="pending" data-applied="">
-                            <td data-label="#">12</td>
+                            <td data-label="#">11</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-us"></span> Purdue University
@@ -582,7 +714,7 @@
                         </tr>
                         
                         <tr data-country="us" data-ranking="110" data-status="pending" data-applied="">
-                            <td data-label="#">13</td>
+                            <td data-label="#">12</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-us"></span> University of Wisconsin–Madison
@@ -599,7 +731,7 @@
                         </tr>
                         
                         <tr data-country="us" data-ranking="123" data-status="pending" data-applied="">
-                            <td data-label="#">14</td>
+                            <td data-label="#">13</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-us"></span> Georgia Institute of Technology
@@ -616,7 +748,7 @@
                         </tr>
                         
                         <tr data-country="us" data-ranking="146" data-status="pending" data-applied="">
-                            <td data-label="#">15</td>
+                            <td data-label="#">14</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-us"></span> University of Southern California
@@ -625,6 +757,23 @@
                             <td data-label="Ranking" class="ranking-cell">
                                 <span class="world-ranking">QS #146</span>
                                 <span class="country-ranking">USA #23</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="uk" data-ranking="149" data-status="pending" data-applied="">
+                            <td data-label="#">15</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-gb"></span> University of Liverpool
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #149</span>
+                                <span class="country-ranking">UK #15</span>
                             </td>
                             <td data-label="Status"><span class="pill pending">Pending</span></td>
                             <td data-label="Applied">—</td>
@@ -649,25 +798,8 @@
                             <td data-label="Documents"><a href="ASU.pdf" target="_blank">Offer Letter</a></td>
                         </tr>
                         
-                        <tr data-country="uk" data-ranking="149" data-status="pending" data-applied="">
-                            <td data-label="#">17</td>
-                            <td data-label="University">
-                                <div class="university-name">
-                                    <span class="flag-icon flag-icon-gb"></span> University of Liverpool
-                                </div>
-                            </td>
-                            <td data-label="Ranking" class="ranking-cell">
-                                <span class="world-ranking">QS #149</span>
-                                <span class="country-ranking">UK #15</span>
-                            </td>
-                            <td data-label="Status"><span class="pill pending">Pending</span></td>
-                            <td data-label="Applied">—</td>
-                            <td data-label="Decision">—</td>
-                            <td data-label="Documents">—</td>
-                        </tr>
-                        
                         <tr data-country="us" data-ranking="207" data-status="pending" data-applied="">
-                            <td data-label="#">18</td>
+                            <td data-label="#">17</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-us"></span> University of Maryland
@@ -684,7 +816,7 @@
                         </tr>
                         
                         <tr data-country="us" data-ranking="448" data-status="accepted" data-applied="2025-07-01">
-                            <td data-label="#">19</td>
+                            <td data-label="#">18</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-us"></span> Iowa State University
@@ -701,7 +833,7 @@
                         </tr>
                         
                         <tr data-country="us" data-ranking="597" data-status="applied" data-applied="2025-08-22">
-                            <td data-label="#">20</td>
+                            <td data-label="#">19</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-us"></span> University of Texas, Dallas
@@ -718,7 +850,7 @@
                         </tr>
                         
                         <tr data-country="us" data-ranking="1000" data-status="accepted" data-applied="2025-06-27">
-                            <td data-label="#">21</td>
+                            <td data-label="#">20</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-us"></span> Florida Institute of Technology
@@ -742,7 +874,7 @@
                         
                         <!-- Ireland -->
                         <tr data-country="ie" data-ranking="118" data-status="pending" data-applied="">
-                            <td data-label="#">22</td>
+                            <td data-label="#">21</td>
                             <td data-label="University">
                                 <div class="university-name">
                                     <span class="flag-icon flag-icon-ie"></span> University College Dublin
@@ -751,6 +883,23 @@
                             <td data-label="Ranking" class="ranking-cell">
                                 <span class="world-ranking">QS #118</span>
                                 <span class="country-ranking">IE #2</span>
+                            </td>
+                            <td data-label="Status"><span class="pill pending">Pending</span></td>
+                            <td data-label="Applied">—</td>
+                            <td data-label="Decision">—</td>
+                            <td data-label="Documents">—</td>
+                        </tr>
+                        
+                        <tr data-country="uk" data-ranking="86" data-status="pending" data-applied="">
+                            <td data-label="#">22</td>
+                            <td data-label="University">
+                                <div class="university-name">
+                                    <span class="flag-icon flag-icon-gb"></span> University of Southampton
+                                </div>
+                            </td>
+                            <td data-label="Ranking" class="ranking-cell">
+                                <span class="world-ranking">QS #87</span>
+                                <span class="country-ranking">UK #10</span>
                             </td>
                             <td data-label="Status"><span class="pill pending">Pending</span></td>
                             <td data-label="Applied">—</td>
