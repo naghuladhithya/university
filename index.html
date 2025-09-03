@@ -462,6 +462,7 @@
         }
     </style>
 </head>
+</head>
 <body>
     <div class="dashboard">
         <header>
@@ -1118,4 +1119,77 @@
                     const filter = this.getAttribute('data-filter');
                     
                     tableRows.forEach(row => {
-                        if (filter === 'all
+                        if (filter === 'all') {
+                            row.style.display = '';
+                        } else {
+                            if (row.getAttribute('data-country') === filter) {
+                                row.style.display = '';
+                            } else {
+                                row.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // Sorting functionality
+            const sortableHeaders = document.querySelectorAll('th.sortable');
+            
+            sortableHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const sortBy = this.getAttribute('data-sort');
+                    const tbody = this.closest('table').querySelector('tbody');
+                    const rows = Array.from(tbody.querySelectorAll('tr'));
+                    
+                    // Determine sort direction
+                    const currentDir = this.getAttribute('data-sort-dir') || 'asc';
+                    const newDir = currentDir === 'asc' ? 'desc' : 'asc';
+                    this.setAttribute('data-sort-dir', newDir);
+                    
+                    // Sort rows
+                    rows.sort((a, b) => {
+                        let aValue = a.getAttribute(`data-${sortBy}`);
+                        let bValue = b.getAttribute(`data-${sortBy}`);
+                        
+                        // Handle different data types
+                        if (sortBy === 'ranking' || sortBy === 'applied') {
+                            aValue = aValue || (sortBy === 'applied' ? '9999-12-31' : '9999');
+                            bValue = bValue || (sortBy === 'applied' ? '9999-12-31' : '9999');
+                            
+                            if (sortBy === 'applied') {
+                                // Date comparison
+                                return newDir === 'asc' ? 
+                                    new Date(aValue) - new Date(bValue) : 
+                                    new Date(bValue) - new Date(aValue);
+                            } else {
+                                // Numeric comparison
+                                return newDir === 'asc' ? 
+                                    parseInt(aValue) - parseInt(bValue) : 
+                                    parseInt(bValue) - parseInt(aValue);
+                            }
+                        } else {
+                            // String comparison
+                            aValue = aValue || '';
+                            bValue = bValue || '';
+                            
+                            return newDir === 'asc' ? 
+                                aValue.localeCompare(bValue) : 
+                                bValue.localeCompare(aValue);
+                        }
+                    });
+                    
+                    // Remove existing rows
+                    while (tbody.firstChild) {
+                        tbody.removeChild(tbody.firstChild);
+                    }
+                    
+                    // Add sorted rows
+                    rows.forEach(row => {
+                        tbody.appendChild(row);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
