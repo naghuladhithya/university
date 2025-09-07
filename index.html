@@ -170,104 +170,6 @@
             font-weight: 500;
         }
         
-        .download-section {
-            padding: 40px 30px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-bottom: 1px solid #eaecef;
-        }
-        
-        .download-container {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: var(--card-shadow);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .download-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--primary);
-            font-size: 2rem;
-            font-weight: 700;
-        }
-        
-        .download-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .download-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 20px;
-            border-radius: 12px;
-            background: #f8f9fa;
-            transition: all 0.3s ease;
-        }
-        
-        .download-step:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--hover-shadow);
-        }
-        
-        .step-number {
-            background: var(--secondary);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-        
-        .step-content h3 {
-            margin-bottom: 8px;
-            color: var(--primary);
-            font-size: 1.3rem;
-        }
-        
-        .step-content p {
-            color: #666;
-            line-height: 1.5;
-        }
-        
-        .download-button {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(120deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            text-decoration: none;
-        }
-        
-        .download-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
-        }
-        
-        .download-note {
-            text-align: center;
-            margin-top: 20px;
-            color: #6c757d;
-            font-style: italic;
-        }
-        
         .table-section {
             padding: 30px;
         }
@@ -511,15 +413,6 @@
                 margin-bottom: 15px;
             }
             
-            .download-step {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .step-number {
-                margin: 0 auto;
-            }
-            
             th, td {
                 padding: 14px 12px;
             }
@@ -556,10 +449,6 @@
                 font-size: 0.9rem;
             }
             
-            .download-title {
-                font-size: 1.6rem;
-            }
-            
             th, td {
                 padding: 12px 10px;
                 font-size: 0.9rem;
@@ -572,6 +461,7 @@
             }
         }
     </style>
+</head>
 </head>
 <body>
     <div class="dashboard">
@@ -594,44 +484,6 @@
             <div class="card rejected">
                 <p class="value">0</p>
                 <p class="label">Rejected</p>
-            </div>
-        </section>
-        
-        <section class="download-section">
-            <div class="download-container">
-                <h2 class="download-title">GET READY TO PLAY</h2>
-                
-                <div class="download-steps">
-                    <div class="download-step">
-                        <div class="step-number">D1</div>
-                        <div class="step-content">
-                            <h3>COMPLETE THE DOWNLOAD</h3>
-                            <p>Download the application package to get started with your university applications.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="download-step">
-                        <div class="step-number">D2</div>
-                        <div class="step-content">
-                            <h3>RUN THE INSTALLER</h3>
-                            <p>Follow the installation instructions to set up your application dashboard.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="download-step">
-                        <div class="step-number">D3</div>
-                        <div class="step-content">
-                            <h3>IMPORT SETTINGS & BOOKMARKS</h3>
-                            <p>Import your preferences and saved universities to personalize your experience.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <a href="#" class="download-button" id="downloadButton">
-                    <i class="fas fa-download"></i> DOWNLOAD APPLICATION PACKAGE
-                </a>
-                
-                <p class="download-note">If your download does not start automatically, please try again.</p>
             </div>
         </section>
         
@@ -669,6 +521,9 @@
                         </tr>
                     </thead>
                     <tbody>
+
+    
+
                         <!-- Singapore -->
                         <tr data-country="sg" data-ranking="8" data-status="pending" data-applied="">
                             <td data-label="#">1</td>
@@ -686,6 +541,9 @@
                             <td data-label="Decision">—</td>
                             <td data-label="Documents">—</td>
                         </tr>
+
+
+
                         
                         <!-- UK -->
                         <tr data-country="uk" data-ranking="9" data-status="applied" data-applied="">
@@ -723,7 +581,9 @@
                             <td data-label="Documents">—</td>
                         </tr>
 
-                        <tr data-country="us" data-ranking="8" data-status="pending" data-applied="">
+
+
+  <tr data-country="us" data-ranking="8" data-status="pending" data-applied="">
                             <td data-label="#">4</td>
                             <td data-label="University">
                                 <div class="university-name">
@@ -740,7 +600,10 @@
                             <td data-label="Documents">—</td>
                         </tr>
 
-                        <!-- UK -->
+
+    
+
+        <!-- UK -->
                         <tr data-country="uk" data-ranking="33" data-status="applied" data-applied="">
                             <td data-label="#">5</td>
                             <td data-label="University">
@@ -775,7 +638,10 @@
                             <td data-label="Decision">Pending</td>
                             <td data-label="Documents">—</td>
                         </tr>
+
                         
+                        <!-- USA -->
+        
                         <!-- USA -->
                         <tr data-country="us" data-ranking="69" data-status="pending" data-applied="">
                             <td data-label="#">7</td>
@@ -902,6 +768,7 @@
                             <td data-label="Documents">—</td>
                         </tr>
 
+
                         <!-- Ireland -->
                         <tr data-country="ie" data-ranking="118" data-status="pending" data-applied="">
                             <td data-label="#">14</td>
@@ -1010,6 +877,8 @@
                             <td data-label="Documents">—</td>
                         </tr>
 
+    
+
                         <!-- USA -->
                         <tr data-country="us" data-ranking="250" data-status="pending" data-applied="">
                             <td data-label="#">20</td>
@@ -1027,8 +896,9 @@
                             <td data-label="Decision">Pending</td>
                             <td data-label="Documents">—</td>
                         </tr>
+                        
 
-                        <tr data-country="us" data-ranking="117" data-status="pending" data-applied="">
+           <tr data-country="us" data-ranking="117" data-status="pending" data-applied="">
                             <td data-label="#">21</td>
                             <td data-label="University">
                                 <div class="university-name">
@@ -1104,6 +974,7 @@
                                 <a href="Florida Tech Scholarship.pdf" target="_blank">Scholarship Letter</a>
                             </td>
                         </tr>
+                        
                     </tbody>
                 </table>
             </div>
@@ -1191,18 +1062,6 @@
                         tbody.appendChild(row);
                     });
                 });
-            });
-            
-            // Download button functionality
-            const downloadButton = document.getElementById('downloadButton');
-            downloadButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Create a modal or alert for download instructions
-                alert('Your download will begin shortly. Please follow the instructions:\n\n1. Complete the download\n2. Run the installer\n3. Import settings & bookmarks\n\nIf your download does not start automatically, please try again.');
-                
-                // In a real implementation, you would trigger a file download here
-                // window.location.href = 'path/to/your/file.zip';
             });
         });
     </script>
