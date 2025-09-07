@@ -8,31 +8,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #9b59b6;
-            --light: #f8f9fa;
-            --dark: #1a2530;
-            --success: #2ecc71;
-            --warning: #f39c12;
-            --danger: #e74c3c;
-            --pending: #95a5a6;
-            --applied: #3498db;
-            --accepted: #2ecc71;
-            --rejected: #e74c3c;
-            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            --primary: #1a237e;       /* Deep blue from the image */
+            --secondary: #ff6f00;     /* Vibrant orange from the image */
+            --accent: #00c853;        /* Success green */
+            --light: #f5f5f5;
+            --dark: #212121;
+            --success: #00c853;
+            --warning: #ffab00;
+            --danger: #ff3d00;
+            --pending: #9e9e9e;
+            --applied: #2196f3;
+            --accepted: #00c853;
+            --rejected: #ff3d00;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            --sporty-gradient: linear-gradient(135deg, #1a237e 0%, #283593 50%, #303f9f 100%);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'Roboto', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
             color: #333;
             line-height: 1.6;
             padding: 20px;
@@ -44,12 +45,12 @@
             margin: 0 auto;
             background: white;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
             overflow: hidden;
         }
         
         header {
-            background: linear-gradient(120deg, var(--primary) 0%, var(--secondary) 100%);
+            background: var(--sporty-gradient);
             color: white;
             padding: 35px 30px;
             text-align: center;
@@ -64,29 +65,30 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at center, transparent 10%, rgba(0,0,0,0.1) 50%);
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 10%, transparent 60%);
             transform: rotate(30deg);
         }
         
         h1 {
             font-size: 2.8rem;
             margin-bottom: 12px;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: 0.5px;
             position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
         
         .tagline {
             font-size: 1.3rem;
-            opacity: 0.9;
+            opacity: 0.95;
             margin-bottom: 8px;
-            font-weight: 500;
+            font-weight: 600;
             position: relative;
         }
         
         .subtag {
             font-size: 1rem;
-            opacity: 0.8;
+            opacity: 0.9;
             margin-bottom: 25px;
             position: relative;
         }
@@ -99,17 +101,18 @@
             padding: 12px 25px;
             border-radius: 30px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s ease;
             position: relative;
             z-index: 1;
             border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         
         .portfolio-link:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
         
         .summary {
@@ -133,6 +136,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            border-top: 4px solid transparent;
         }
         
         .card:hover {
@@ -141,33 +145,33 @@
         }
         
         .applied {
-            background: linear-gradient(135deg, #e8f4fd 0%, #cce5ff 100%);
-            color: #0a58ca;
-            border-left: 4px solid var(--applied);
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            color: #0d47a1;
+            border-top-color: var(--applied);
         }
         
         .accepted {
-            background: linear-gradient(135deg, #e8f5e9 0%, #d4edda 100%);
-            color: #0a5e2d;
-            border-left: 4px solid var(--accepted);
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            color: #1b5e20;
+            border-top-color: var(--accepted);
         }
         
         .rejected {
-            background: linear-gradient(135deg, #fde8e8 0%, #f8d7da 100%);
-            color: #ca0a0a;
-            border-left: 4px solid var(--rejected);
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            color: #b71c1c;
+            border-top-color: var(--rejected);
         }
         
         .value {
             font-size: 2.5rem;
-            font-weight: bold;
+            font-weight: 800;
             margin-bottom: 8px;
         }
         
         .label {
             font-size: 1rem;
             opacity: 0.9;
-            font-weight: 500;
+            font-weight: 600;
         }
         
         .table-section {
@@ -193,7 +197,7 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -202,8 +206,9 @@
         }
         
         .filter-button:hover {
-            background: #3a516e;
+            background: #283593;
             transform: translateY(-2px);
+            box-shadow: var(--hover-shadow);
         }
         
         .dropdown-content {
@@ -254,6 +259,7 @@
             font-size: 1.8rem;
             padding-bottom: 10px;
             border-bottom: 2px solid #eaecef;
+            font-weight: 700;
         }
         
         .table-container {
@@ -277,8 +283,8 @@
         
         th {
             background: #f8f9fa;
-            font-weight: 600;
-            color: #495057;
+            font-weight: 700;
+            color: var(--primary);
             position: sticky;
             top: 0;
             white-space: nowrap;
@@ -312,7 +318,7 @@
         .university-name {
             display: flex;
             align-items: center;
-            font-weight: 500;
+            font-weight: 600;
         }
         
         .ranking-cell {
@@ -321,7 +327,7 @@
         }
         
         .world-ranking {
-            font-weight: 500;
+            font-weight: 600;
             color: var(--primary);
         }
         
@@ -335,24 +341,29 @@
             padding: 8px 16px;
             border-radius: 50px;
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 600;
             text-align: center;
             min-width: 90px;
         }
         
         .pill.pending {
-            background: #fff3cd;
-            color: #856404;
+            background: #fff8e1;
+            color: #ff8f00;
         }
         
         .pill.applied {
-            background: #cce5ff;
-            color: #004085;
+            background: #e3f2fd;
+            color: #1565c0;
         }
         
         .pill.accepted {
-            background: #d4edda;
-            color: #155724;
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .pill.rejected {
+            background: #ffebee;
+            color: #c62828;
         }
         
         .scholarship-list {
@@ -366,11 +377,11 @@
             color: var(--secondary);
             text-decoration: none;
             transition: color 0.2s ease;
-            font-weight: 500;
+            font-weight: 600;
         }
         
         a:hover {
-            color: #1a73e8;
+            color: #ff9100;
             text-decoration: underline;
         }
         
@@ -462,7 +473,6 @@
         }
     </style>
 </head>
-</head>
 <body>
     <div class="dashboard">
         <header>
@@ -521,9 +531,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
-    
-
                         <!-- Singapore -->
                         <tr data-country="sg" data-ranking="8" data-status="pending" data-applied="">
                             <td data-label="#">1</td>
@@ -541,9 +548,6 @@
                             <td data-label="Decision">—</td>
                             <td data-label="Documents">—</td>
                         </tr>
-
-
-
                         
                         <!-- UK -->
                         <tr data-country="uk" data-ranking="9" data-status="applied" data-applied="">
@@ -581,9 +585,7 @@
                             <td data-label="Documents">—</td>
                         </tr>
 
-
-
-  <tr data-country="us" data-ranking="8" data-status="pending" data-applied="">
+                        <tr data-country="us" data-ranking="8" data-status="pending" data-applied="">
                             <td data-label="#">4</td>
                             <td data-label="University">
                                 <div class="university-name">
@@ -600,10 +602,7 @@
                             <td data-label="Documents">—</td>
                         </tr>
 
-
-    
-
-        <!-- UK -->
+                        <!-- UK -->
                         <tr data-country="uk" data-ranking="33" data-status="applied" data-applied="">
                             <td data-label="#">5</td>
                             <td data-label="University">
@@ -638,10 +637,7 @@
                             <td data-label="Decision">Pending</td>
                             <td data-label="Documents">—</td>
                         </tr>
-
                         
-                        <!-- USA -->
-        
                         <!-- USA -->
                         <tr data-country="us" data-ranking="69" data-status="pending" data-applied="">
                             <td data-label="#">7</td>
@@ -768,7 +764,6 @@
                             <td data-label="Documents">—</td>
                         </tr>
 
-
                         <!-- Ireland -->
                         <tr data-country="ie" data-ranking="118" data-status="pending" data-applied="">
                             <td data-label="#">14</td>
@@ -877,8 +872,6 @@
                             <td data-label="Documents">—</td>
                         </tr>
 
-    
-
                         <!-- USA -->
                         <tr data-country="us" data-ranking="250" data-status="pending" data-applied="">
                             <td data-label="#">20</td>
@@ -896,9 +889,8 @@
                             <td data-label="Decision">Pending</td>
                             <td data-label="Documents">—</td>
                         </tr>
-                        
 
-           <tr data-country="us" data-ranking="117" data-status="pending" data-applied="">
+                        <tr data-country="us" data-ranking="117" data-status="pending" data-applied="">
                             <td data-label="#">21</td>
                             <td data-label="University">
                                 <div class="university-name">
@@ -974,7 +966,6 @@
                                 <a href="Florida Tech Scholarship.pdf" target="_blank">Scholarship Letter</a>
                             </td>
                         </tr>
-                        
                     </tbody>
                 </table>
             </div>
