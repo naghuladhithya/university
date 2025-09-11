@@ -161,6 +161,23 @@
             color: #1b5e20;
             border-top-color: var(--accepted);
         }
+
+.profile-image-container {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px; /* centers image and adds spacing */
+    border-radius: 50%;  /* makes it circular */
+    overflow: hidden;
+    border: 4px solid white; /* optional border */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.profile-image-container img.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
         
         .rejected {
             background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
@@ -485,17 +502,19 @@
             <div class="profile-header">
                 <div class="profile-header-top">
                     <div class="profile-image-container">
-                        <img src="images/naghul.jpeg" alt="Naghul Adhithya" class="profile-image">
+                        <img src="naghul.jpeg" alt="Naghul Adhithya" class="profile-image">
                         <div class="profile-status"></div>
                     </div>
 
-    <div class="dashboard">
-        <header>
-            <h1>Naghul Adhithya</h1>
-            <p class="tagline">University Admissions Dashboard</p>
-            <p class="subtag">Fall 2026 Applications • Status Tracking • Documents & Scholarships</p>
-            <a href="https://naghuladhithya.github.io/" class="portfolio-link" target="_blank">View My Portfolio</a>
-        </header>
+  <header>
+    <div class="profile-image-container">
+        <img src="images/naghul.jpeg" alt="Naghul Adhithya" class="profile-image">
+    </div>
+    <h1>Naghul Adhithya</h1>
+    <p class="tagline">University Admissions Dashboard</p>
+    <p class="subtag">Fall 2026 Applications • Status Tracking • Documents & Scholarships</p>
+    <a href="https://naghuladhithya.github.io/" class="portfolio-link" target="_blank">View My Portfolio</a>
+</header>
         
         <section class="summary">
             <div class="card applied">
