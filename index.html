@@ -184,6 +184,16 @@
             color: #b71c1c;
             border-top-color: var(--rejected);
         }
+
+.status-box {
+    max-width: 1000px;       /* box width */
+    margin: 0 auto 50px;     /* center horizontally + some bottom spacing */
+    background: white;       /* card background */
+    padding: 30px;           /* inner spacing */
+    border-radius: 16px;     /* rounded corners */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12); /* subtle shadow */
+}
+
         
         .value {
             font-size: 2.5rem;
@@ -451,6 +461,16 @@
                 padding: 14px 12px;
             }
             
+.table-container {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    max-width: 1000px;  
+    margin: 0 auto 50px;  /* sets a nice width for the table */
+    padding: 10px;        /* centers it horizontally */
+}
+
+
             .table-section {
                 padding: 20px 15px;
             }
@@ -531,6 +551,9 @@
         
             
             <h2>Application Status</h2>
+
+
+
             
             <div class="table-container">
                 <table id="applicationsTable">
